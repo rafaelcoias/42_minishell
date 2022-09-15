@@ -6,7 +6,7 @@
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 11:43:09 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/07/13 05:14:51 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/15 11:28:48 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <ctype.h>
-# include <sys/types.h>
-# include <sys/wait.h>
 
 /* COLORS */
 
+# define BLUE	"\033[0;34m"
 # define RED	"\033[0;31m"
 # define YELLOW	"\033[0;33m"
 # define GREEN	"\033[1;32m"
