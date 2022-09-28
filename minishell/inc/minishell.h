@@ -31,17 +31,8 @@
 # include <term.h>
 
 /*	DEFINES */
-
-
-
 /* ERROR	*/
-
-
-
 /*	LISTS	*/
-
-
-
 /*	FUNCTIONS */
 
 #endif
