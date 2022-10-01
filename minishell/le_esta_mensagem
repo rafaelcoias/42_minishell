@@ -1,0 +1,7 @@
+Ola goncalo,
+
+Criei os ficheiros que vamos precisar, cada um tem o nome do seu objetivo.
+
+Iniciei tambem o main e vou comecar a ver como funcionam as funcoes do subject.
+
+Criei uma lista chamada t_data onde podemos guardar toda a informacao que quisermos (diretorio atual, o comando usado, etc...)

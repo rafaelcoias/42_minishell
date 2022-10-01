@@ -1,24 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/09/07 23:32:46 by rade-sar          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/09/28 17:10:08 by rade-sar         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-#$######### 		   NAMES 		##########
-=======
-#    Updated: 2022/09/28 17:05:48 by gseco-lu         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-########## 		  % NAMES 		##########
->>>>>>> 35065327df670757daefb38f5ab4e06a7c439641
+########## 		   NAMES 		##########
 
 NAME = minishell
 
@@ -31,6 +12,18 @@ OBJ_DIR = objs
 OBJ_PATH = $(OBJ_DIR)/
 
 SRC = $(SRC_PATH)main.c	\
+		$(SRC_PATH)cd_command.c	\
+		$(SRC_PATH)echo_command.c	\
+		$(SRC_PATH)env_command.c	\
+		$(SRC_PATH)exit_command.c	\
+		$(SRC_PATH)export_command.c	\
+		$(SRC_PATH)pwd_command.c	\
+		$(SRC_PATH)unset_command.c	\
+		$(SRC_PATH)handle_ctrl.c	\
+		$(SRC_PATH)handle_quotes.c	\
+		$(SRC_PATH)handle_command.c	\
+		$(SRC_PATH)command_exec.c	\
+		$(SRC_PATH)command_path.c	\
 
 ########## 		  INCLUDES 		##########
 
@@ -50,7 +43,7 @@ CC = gcc
 
 ########## 		   FLAGS 		##########
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
 MLC_FLAGS = -fsanitize=address
 

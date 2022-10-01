@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/15 11:34:17 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:44:30 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /*	INCLUDES	*/
 
 # include "./libft/libft.h"
-# include <readline/realine.h>
-# include <realine/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <sys/types.h>
 # include <sys/time.h>
 # include <sys/resource.h>
@@ -31,8 +31,23 @@
 # include <term.h>
 
 /*	DEFINES */
+
+# define PROMPT "minishell ~ "
+
 /* ERROR	*/
+
+
+
 /*	LISTS	*/
+
+typedef struct s_data
+{
+	char	*command;
+}	t_data;
+
+
 /*	FUNCTIONS */
+
+void	read_command(char *command);
 
 #endif
