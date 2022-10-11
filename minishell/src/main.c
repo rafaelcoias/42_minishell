@@ -6,16 +6,25 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 18:10:52 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/11 11:11:10 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:44:32 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+static void	get_env_path(t_data *data)
+{
+	char	*path;
+
+	path = getenv("PATH");
+	data->env_path = ft_split(&path[5], ':');
+}
+
+
 /*	Free everything in data list
  * */
 
-void	free_all(t_data *data)
+static void	free_all(t_data *data)
 {
 	(void)data;
 }
@@ -38,11 +47,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	char		*input;
-	
+
 	(void)argc;
 	(void)argv;
 	data.envp = envp;
 	data.exit = 0;
+	get_env_path(&data);
 	while (!data.exit)
 	{
 		input = readline(PROMPT);

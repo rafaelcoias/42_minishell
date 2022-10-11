@@ -70,13 +70,13 @@ RM = rm -rf
 
 ########## 		  MESSAGES 		##########
 
-CREATE_PROJ_MSG = @echo "\n<========== $(GREEN)$(NAME) created$(RESET) ==========>\n"
+CREATE_PROJ_MSG = @echo "\n[ $(GREEN)$(NAME) created$(RESET) ]\n"
 
-REMOVED_MSG = @echo "\n<========== $(RED)$(NAME) removed$(RESET) ==========>\n"
+REMOVED_MSG = @echo "\n[ $(RED)$(NAME) removed$(RESET) ]\n"
 
-NORM_LIBFT_MSG = @echo "\n<========== $(YELLOW)Norm $(LIBFT)$(RESET) ==========>\n"
+NORM_LIBFT_MSG = @echo "\n[ $(YELLOW)Norm $(LIBFT)$(RESET) ]\n"
 
-NORM_PROJ_MSG = @echo "\n<========== $(YELLOW)Norm $(NAME)$(RESET) ==========>\n"
+NORM_PROJ_MSG = @echo "\n[ $(YELLOW)Norm $(NAME)$(RESET) ]\n"
 
 NORM_CORRECT = @echo "\nNorminette: [$(GREEN)OK$(RESET)]\n"
 

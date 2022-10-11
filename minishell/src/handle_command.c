@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 22:36:01 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/11 11:18:32 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:46:23 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ void	read_command(t_data *data)
 			echo_command(data);
 		else if (!ft_strcmp(data->cmd[0], EXIT_CMD))
 			data->exit = 1;
+		/*
+		else if (!ft_strcmp(data->cmd[0], CD_CMD))
+			cd_command(data);
+		else if (!ft_strcmp(data->cmd[0], EXPORT_CMD))
+			export_command(data);
+		else if (!ft_strcmp(data->cmd[0], ENV_CMD))
+			env_command(data);
+		else if (!ft_strcmp(data->cmd[0], UNSET_CMD))
+			unset_command(data);*/
 		else
 			error_msg(CMD_ERROR);
 		ft_free_mtx(data->cmd);

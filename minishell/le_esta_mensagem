@@ -4,9 +4,10 @@ Criei os ficheiros que vamos precisar, cada um tem o nome do seu objetivo.
 
 Iniciei tambem o main e vou comecar a ver como funcionam as funcoes do subject.
 
-Criei uma lista chamada t_data onde podemos guardar toda a informacao que quisermos (diretorio atual, o comando usado pelo user, etc...)
+Criei uma lista chamada t_data onde podemos guardar toda a informacao que quisermos (diretorio atual, o comando usado pelo user, etc)
 
-Tambem fiz os comandos mais basicos, podes testar se quiseres (o pwd e o echo).
+Tambem fiz os plugins mais basicos, podes testar se quiseres (o pwd e o echo) e a funcao (no ficheiro command_exec.c) para executar
+comandos gerais (como o comando cat, grep, etc).
 
 Comentei tudo para nos organizarmos
 
