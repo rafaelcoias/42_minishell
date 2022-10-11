@@ -24,6 +24,7 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)handle_command.c	\
 		$(SRC_PATH)command_exec.c	\
 		$(SRC_PATH)command_path.c	\
+		$(SRC_PATH)error_msg.c		\
 
 ########## 		  INCLUDES 		##########
 
