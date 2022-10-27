@@ -31,19 +31,16 @@ Create your own mini shell that works like a normal terminal shell. Make sure it
 Make sure you know what all the following function are and what they do
 
   - <a href="https://man7.org/linux/man-pages/man3/readline.3.html">readline()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/rl_clear_history.html">rl_clear_history()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/rl_on_new_line.html">rl_on_new_line()</a>
-  - <a href="https://man7.org/linux/man-pages/man/rl_replace_line.html">rl_replace_line()</a>
-  - <a href="https://man7.org/linux/man-pages/man/rl_redisplay.html">rl_redisplay()</a>
-  - <a href="https://man7.org/linux/man-pages/man/add_history.html">add_history()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/waitpid.html">waitpid()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/signal.html">signal()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/sigaction.html">sigaction()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/sigemptyset.html">sigemptyset()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/sigaddset.html">sigaddset()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/kill.html">kill()</a>
-  - <a href="https://man7.org/linux/man-pages/man/getcwd.html">getcwd()</a>
-  - <a href="https://man7.org/linux/man-pages/man/chdir.html">chdir()</a>
+  - <a href="https://manpages.org/termreadlinegnu/3">all readline functions</a> 
+  - <a href="https://linux.die.net/man/3/history">add_history()</a> 
+  - <a href="https://linux.die.net/man/2/waitpid">waitpid()</a> 
+  - <a href="https://man7.org/linux/man-pages/man7/signal.7.html">signal()</a> 
+  - <a href="https://man7.org/linux/man-pages/man2/sigaction.2.html">sigaction()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/sigemptyset.3p.html">sigemptyset()</a> 
+  - <a href="https://linux.die.net/man/3/sigaddset">sigaddset()</a> 
+  - <a href="https://linux.die.net/man/1/kill">kill()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/getcwd.3.html">getcwd()</a>
+  - <a href="https://man7.org/linux/man-pages/man2/chdir.2.html">chdir()</a>
   - <a href="https://man7.org/linux/man-pages/man/stat.html">stat()</a> 
   - <a href="https://man7.org/linux/man-pages/man/fstat.html">fstat()</a> 
   - <a href="https://man7.org/linux/man-pages/man/unlink.html">unlink()</a> 
