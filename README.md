@@ -53,15 +53,15 @@ Make sure you know what all the following function are and what they do
   - <a href="https://man7.org/linux/man-pages/man3/isatty.3.html">isatty()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/ttyname.3.html">ttyname()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/ttyslot.3.html">ttyslot()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/ioctl.3.html">ioctl()</a>
+  - <a href="https://man7.org/linux/man-pages/man2/ioctl.2.html">ioctl()</a>
   - <a href="https://man7.org/linux/man-pages/man3/getenv.3.html">getenv()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/tcsetattr.3.html">tcsetattr()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/tcgetattr.3.html">tcgetattr()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetent.3.html">tgetent()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetflag.html">tgetflag()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetstr.html">tgetstr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tgoto.html">tgoto()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tputs.html">tputs()</a> 
+  - <a href="https://linux.die.net/man/3/tgetent">tgetent()</a>
+  - <a href="https://linux.die.net/man/3/tgetflag">tgetflag()</a>
+  - <a href="https://linux.die.net/man/3/tgetstr">tgetstr()</a> 
+  - <a href="https://linux.die.net/man/3/tgoto">tgoto()</a> 
+  - <a href="https://linux.die.net/man/3/tgoto">tputs()</a> 
   
   ## Preview
 
