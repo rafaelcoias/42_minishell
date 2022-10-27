@@ -47,9 +47,9 @@ Make sure you know what all the following function are and what they do
   - <a href="https://man7.org/linux/man-pages/man2/execve.2.html">execve()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/dup2.2.html">dup2()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/pipe.2.html">pipe()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/opendir.html">opendir()</a>
-  - <a href="https://man7.org/linux/man-pages/man/readdir.html">readdir()</a>
-  - <a href="https://man7.org/linux/man-pages/man/closedir.html">closedir()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/opendir.3.html">opendir()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/readdir.3.html">readdir()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/closedir.3.html">closedir()</a>
   - <a href="https://man7.org/linux/man-pages/man/isatty.html">isatty()</a> 
   - <a href="https://man7.org/linux/man-pages/man/ttyname.html">ttyname()</a> 
   - <a href="https://man7.org/linux/man-pages/man/ttyslot.html">ttyslot()</a> 
