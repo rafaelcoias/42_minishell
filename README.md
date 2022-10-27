@@ -66,3 +66,22 @@ Make sure you know what all the following function are and what they do
   - <a href="https://man7.org/linux/man-pages/man3/tgoto.3.html">tgoto()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/tputs3.html">tputs()</a> 
   
+## Preview
+
+<details><summary>My Minishell</summary>
+  
+Coming soon
+  
+</details>
+
+<details><summary>My grade</summary>
+  
+Coming soon
+  
+</details>
+
+<hr>
+
+I hope you found it interesting!
+
+If you are going to do minishell, I wish you good luck and hope that you learned something here!
