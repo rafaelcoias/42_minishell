@@ -31,42 +31,42 @@ Create your own mini shell that works like a normal terminal shell. Make sure it
 Make sure you know what all the following function are and what they do
 
   - <a href="https://man7.org/linux/man-pages/man3/readline.3.html">readline()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/rl_clear_history.html">rl_clear_history()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/rl_on_new_line.html">rl_on_new_line()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/rl_replace_line.html">rl_replace_line()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/rl_redisplay.html">rl_redisplay()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/add_history.html">add_history()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/waitpid.html">waitpid()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/signal.html">signal()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/sigaction.html">sigaction()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/sigemptyset.html">sigemptyset()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/sigaddset.html">sigaddset()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/kill.html">kill()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/getcwd.html">getcwd()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/chdir.html">chdir()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/stat.html">stat()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/fstat.html">fstat()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/unlink.html">unlink()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/execve.html">execve()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/dup2.html">dup2()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/pipe.html">pipe()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/opendir.html">opendir()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/readdir.html">readdir()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/closedir.html">closedir()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/isatty.html">isatty()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/ttyname.html">ttyname()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/ttyslot.html">ttyslot()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/ioctl.html">ioctl()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/getenv.html">getenv()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tcsetattr.html">tcsetattr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tcgetattr.html">tcgetattr()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetent.html">tgetent()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetflag.html">tgetflag()</a>
-  - <a href="https://man7.org/linux/man-pages/man3/tgetstr.html">tgetstr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tgoto.html">tgoto()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tputs.html">tputs()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/rl_clear_history.html">rl_clear_history()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/rl_on_new_line.html">rl_on_new_line()</a>
+  - <a href="https://man7.org/linux/man-pages/man/rl_replace_line.html">rl_replace_line()</a>
+  - <a href="https://man7.org/linux/man-pages/man/rl_redisplay.html">rl_redisplay()</a>
+  - <a href="https://man7.org/linux/man-pages/man/add_history.html">add_history()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/waitpid.html">waitpid()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/signal.html">signal()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/sigaction.html">sigaction()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/sigemptyset.html">sigemptyset()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/sigaddset.html">sigaddset()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/kill.html">kill()</a>
+  - <a href="https://man7.org/linux/man-pages/man/getcwd.html">getcwd()</a>
+  - <a href="https://man7.org/linux/man-pages/man/chdir.html">chdir()</a>
+  - <a href="https://man7.org/linux/man-pages/man/stat.html">stat()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/fstat.html">fstat()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/unlink.html">unlink()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/execve.html">execve()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/dup2.html">dup2()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/pipe.html">pipe()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/opendir.html">opendir()</a>
+  - <a href="https://man7.org/linux/man-pages/man/readdir.html">readdir()</a>
+  - <a href="https://man7.org/linux/man-pages/man/closedir.html">closedir()</a>
+  - <a href="https://man7.org/linux/man-pages/man/isatty.html">isatty()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/ttyname.html">ttyname()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/ttyslot.html">ttyslot()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/ioctl.html">ioctl()</a>
+  - <a href="https://man7.org/linux/man-pages/man/getenv.html">getenv()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/tcsetattr.html">tcsetattr()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/tcgetattr.html">tcgetattr()</a>
+  - <a href="https://man7.org/linux/man-pages/man/tgetent.html">tgetent()</a>
+  - <a href="https://man7.org/linux/man-pages/man/tgetflag.html">tgetflag()</a>
+  - <a href="https://man7.org/linux/man-pages/man/tgetstr.html">tgetstr()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/tgoto.html">tgoto()</a> 
+  - <a href="https://man7.org/linux/man-pages/man/tputs.html">tputs()</a> 
   
-## Preview
+  ## Preview
 
 <details><summary>My Minishell</summary>
   
