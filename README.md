@@ -50,18 +50,18 @@ Make sure you know what all the following function are and what they do
   - <a href="https://man7.org/linux/man-pages/man3/opendir.3.html">opendir()</a>
   - <a href="https://man7.org/linux/man-pages/man3/readdir.3.html">readdir()</a>
   - <a href="https://man7.org/linux/man-pages/man3/closedir.3.html">closedir()</a>
-  - <a href="https://man7.org/linux/man-pages/man/isatty.html">isatty()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/ttyname.html">ttyname()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/ttyslot.html">ttyslot()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/ioctl.html">ioctl()</a>
-  - <a href="https://man7.org/linux/man-pages/man/getenv.html">getenv()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/tcsetattr.html">tcsetattr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/tcgetattr.html">tcgetattr()</a>
-  - <a href="https://man7.org/linux/man-pages/man/tgetent.html">tgetent()</a>
-  - <a href="https://man7.org/linux/man-pages/man/tgetflag.html">tgetflag()</a>
-  - <a href="https://man7.org/linux/man-pages/man/tgetstr.html">tgetstr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/tgoto.html">tgoto()</a> 
-  - <a href="https://man7.org/linux/man-pages/man/tputs.html">tputs()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/isatty.3.html">isatty()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/ttyname.3.html">ttyname()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/ttyslot.3.html">ttyslot()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/ioctl.3.html">ioctl()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/getenv.3.html">getenv()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/tcsetattr.3.html">tcsetattr()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/tcgetattr.3.html">tcgetattr()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/tgetent.3.html">tgetent()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/tgetflag.html">tgetflag()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/tgetstr.html">tgetstr()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/tgoto.html">tgoto()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/tputs.html">tputs()</a> 
   
   ## Preview
 
