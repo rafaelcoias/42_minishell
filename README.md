@@ -56,12 +56,11 @@ Make sure you know what all the following function are and what they do
   - <a href="https://man7.org/linux/man-pages/man2/ioctl.2.html">ioctl()</a>
   - <a href="https://man7.org/linux/man-pages/man3/getenv.3.html">getenv()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/tcsetattr.3.html">tcsetattr()</a> 
-  - <a href="https://man7.org/linux/man-pages/man3/tcgetattr.3.html">tcgetattr()</a>
   - <a href="https://linux.die.net/man/3/tgetent">tgetent()</a>
   - <a href="https://linux.die.net/man/3/tgetflag">tgetflag()</a>
   - <a href="https://linux.die.net/man/3/tgetstr">tgetstr()</a> 
   - <a href="https://linux.die.net/man/3/tgoto">tgoto()</a> 
-  - <a href="https://linux.die.net/man/3/tgoto">tputs()</a> 
+  - <a href="https://linux.die.net/man/3/tputs">tputs()</a> 
   
   ## Preview
 
