@@ -61,6 +61,8 @@ typedef struct s_data
 	int	outfile_fd;
 	char	**cmd;
 	char	*cmd_path;
+	int		cmd_index;
+	char	*home_path;
 	int	exit;
 }	t_data;
 
