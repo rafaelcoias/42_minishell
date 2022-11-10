@@ -12,29 +12,32 @@
 
 #include "../inc/minishell.h"
 
-static void	get_env_path(t_data *data)
+t_data	*data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
+
+// Saves all command paths
+
+static void	get_env_path(void)
 {
 	char	*path;
 
 	path = getenv("PATH");
-	data->env_path = ft_split(&path[5], ':');
+	data()->env_path = ft_split(&path[5], ':');
 }
-
 
 /*	Free everything in data list
- * */
+ */
 
-static void	free_all(t_data *data)
+static void	free_all(char *input)
 {
-	(void)data;
+	// ft_freelst(data()->token);
+	// ft_freelst(data()->cmd);
+	free(input);
 }
-
-t_data	*data()
-{
-	static t_data	data;
-	return (&data);
-}
-
 
 /*	When minishell starts it will always ask for
  * the users input.
@@ -58,14 +61,15 @@ int	main(int argc, char **argv, char **envp)
 	signal_handler();
 	data()->envp = envp;
 	data()->exit = 0;
-	get_env_path(data());
+	get_env_path();
 	while (!data()->exit)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-		read_command(data());
-		free(input);
+		//parser(input);
+		if (!create_commands())
+			execute();
+		free_all(input);
 	}
-	free_all(&data);
 	return (0);
 }

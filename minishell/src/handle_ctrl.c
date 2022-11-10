@@ -12,21 +12,21 @@
 
 #include "../inc/minishell.h"
 
-void    sigint_handler(int x)
+void	sigint_handler(int x)
 {
-    (void)x;
-    ft_printf("\n%s", PROMPT);
+	(void)x;
+	ft_printf("\n%s", PROMPT);
 }
 
-void    sigtstp_handler(int x)
+void	sigtstp_handler(int x)
 {
-    (void)x;
-    exit(0);
+	(void)x;
+	exit(0);
 }
 
-void    signal_handler()
+void	signal_handler(void)
 {
-    signal(SIGINT, sigint_handler);
-    signal(SIGTSTP, sigtstp_handler);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler);
+	signal(SIGTSTP, sigtstp_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

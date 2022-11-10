@@ -13,42 +13,29 @@
 #include "../inc/minishell.h"
 
 /*	This function sees what command or
- *	commands did the user write, pipe by
- *	pipe until "n_of_pipes" is reached.
+ *	commands did the user write.
  *
  *	Split functions is used to divide the
  *	command by spaces to see the first word
  *	written.
- *
- * If there is an invalid command, it returns
- *	an error.
  * */
 
-void	read_command(t_data *data)
+void	check_builtins(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (data->pipes[i])
-	{
-		data->cmd = ft_split(data->pipes[i++], ' '); 
-		if (!ft_strcmp(data->cmd[0], PWD_CMD))	
-			pwd_command();
-		else if (!ft_strcmp(data->cmd[0], ECHO_CMD))
-			echo_command(data);
-		else if (!ft_strcmp(data->cmd[0], EXIT_CMD))
-			data->exit = 1;
-		/*
-		else if (!ft_strcmp(data->cmd[0], CD_CMD))
-			cd_command(data);
-		else if (!ft_strcmp(data->cmd[0], EXPORT_CMD))
-			export_command(data);
-		else if (!ft_strcmp(data->cmd[0], ENV_CMD))
-			env_command(data);
-		else if (!ft_strcmp(data->cmd[0], UNSET_CMD))
-			unset_command(data);*/
-		else
-			error_msg(CMD_ERROR);
-		ft_free_mtx(data->cmd);
-	}
+	if (!ft_strcmp(cmd->args[0], PWD_CMD))
+		pwd_command();
+	else if (!ft_strcmp(cmd->args[0], ECHO_CMD))
+		echo_command(cmd->args);
+	else if (!ft_strcmp(cmd->args[0], EXIT_CMD))
+		data()->exit = 1;
+	else if (!ft_strcmp(cmd->args[0], CD_CMD))
+		cd_command(cmd->args);
 }
+
+/*
+	else if (!ft_strcmp(cmd->args[0], EXPORT_CMD))
+		export_command();
+	else if (!ft_strcmp(cmd->args[0], ENV_CMD))
+		env_command();
+	else if (!ft_strcmp(cmd->args[0], UNSET_CMD))
+		unset_command();*/

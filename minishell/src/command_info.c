@@ -31,29 +31,54 @@
  *	the command is invalid and return an error.
  * */
 
-char*	get_cmd_path(t_data *data)
+static char	*get_cmd_path(char *cmd)
 {
 	char	*add_slash;
 	char	*path;
 	int		i;
 
-	if (ft_strchr(data->cmd[0], '/') && !access(data->cmd[0], F_OK))
-		return (data->cmd[0]);
-	else if (ft_strchr(data->cmd[0], '/') && access(data->cmd[0], F_OK))
-	{
-		error_msg(CMD_ERROR);
+	if (ft_strchr(cmd, '/') && !access(cmd, F_OK))
+		return (cmd);
+	else if (ft_strchr(cmd, '/') && access(cmd, F_OK))
 		return (NULL);
-	}
 	i = -1;
-	while (data->env_path[++i])
+	while (data()->env_path[++i])
 	{
-		add_slash = ft_strjoin(data->env_path[i], "/");
-		path = ft_strjoin(add_slash, data->cmd[0]);
+		add_slash = ft_strjoin(data()->env_path[i], "/");
+		path = ft_strjoin(add_slash, cmd);
 		free(add_slash);
 		if (!access(path, F_OK))
 			return (path);
 		free(path);
 	}
-	error_msg(CMD_ERROR);
 	return (NULL);
+}
+
+/*	Creates a command based on the tokens */
+
+int	create_commands(void)
+{
+	int	i;
+
+	while (data()->token)
+	{
+		data()->cmd = malloc(sizeof(t_cmd));
+		if (!data()->cmd)
+			return (error_msg(MLC_ERROR));
+		data()->cmd->path = get_cmd_path(data()->token->word);
+		if (!data()->cmd->path)
+		{
+			error_msg(CMD_ERROR);
+			break ;
+		}
+		i = 0;
+		while (data()->token && ft_strcmp(data()->token->word, "|"))
+		{
+			data()->cmd->args[i++] = data()->token->word;
+			data()->token = data()->token->next;
+		}
+		data()->cmd->args[i] = NULL;
+		data()->token = data()->token->next;
+	}
+	return (0);
 }

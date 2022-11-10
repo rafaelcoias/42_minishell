@@ -14,10 +14,11 @@
 
 //	Handle the pwd command
 
-void	pwd_command()
+void	pwd_command(void)
 {
 	char	path[BUFFER];
 
 	getcwd(path, BUFFER);
 	ft_printf("%s\n", path);
+	exit(0);
 }

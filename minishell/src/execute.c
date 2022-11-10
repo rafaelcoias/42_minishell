@@ -12,17 +12,23 @@
 
 #include "../inc/minishell.h"
 
-static int redirect_input(t_data *data)
+/*
+static int redirect_input()
 {
-	(void)data;
+	dup2(data()->fd_in, STDIN_FILENO);
 	return (0);
 }
 
-static int redirect_output(t_data *data)
+static int redirect_output()
 {
-	(void)data;
+	dup2(data()->fd_out, STDOUT_FILENO);
 	return (0);
 }
+
+static int heredoc()
+{
+	return (0);
+}*/
 
 /*	
  	Execute is the function that executes any
@@ -39,19 +45,18 @@ static int redirect_output(t_data *data)
   path with the get_cmd_path() function.
 */
 
-static void	execute(t_data *data, int i)
+static void	exec(t_cmd *cmd)
 {
-	close(data->pipe_fd[0]);
-	dup2(data->pipe_fd[1], STDOUT_FILENO);
-	if (redirect_output(data))
-		dup2(data->outfile_fd, STDOUT_FILENO);
-	if (execve(get_cmd_path(data), &data->pipes[i], data->envp) == -1)
+	close(data()->cmd->fd[0]);
+	dup2(data()->cmd->fd[1], STDOUT_FILENO);
+	check_builtins(cmd);
+	if (execve(cmd->path, cmd->args, data()->envp) == -1)
 		error_msg(EXEC_ERROR);
 	exit(0);
 }
 
 /*	This function runs every command until
- *	there are no pipes left.
+ *	there are no commands (pipes) left.
  *
  *	If there is an input redirection "<", then
  *	the fd of the file pointed to by "<" is changed
@@ -59,7 +64,7 @@ static void	execute(t_data *data, int i)
  *
  *	After that, a pipe is created using the pipe
  *	function. The command line equivalent to
- *	that pipe is executed in the execute() function.
+ *	that pipe is executed in the exec() function.
  *
  *	close() function are used to always close 
  *	the fd of the write/output side of the pipe.
@@ -68,26 +73,23 @@ static void	execute(t_data *data, int i)
  *	of the read/input side of the pipe.
  * */
 
-int	handle_pipe(t_data *data)
+int	execute(void)
 {
-	int	pid_child;
-	int	i;
-
-	i = 0;
-	if (redirect_input(data))
-		dup2(data->infile_fd, STDIN_FILENO);
-	while (data->pipes[i])
+	while (data()->cmd)
 	{
-		if (pipe(data->pipe_fd) == -1)
+		data()->cmd->pid = fork();
+		if (pipe(data()->cmd->fd) == -1)
 			return (error_msg(PIPE_ERROR));
-		pid_child = fork();
-		if (pid_child == -1)
-			error_msg(FORK_ERROR);
-		if (!pid_child)
-			execute(data, i);
-		close(data->pipe_fd[1]);
-		waitpid(pid_child, 0, 0);
-		dup2(data->pipe_fd[0], STDIN_FILENO);
+		if (!data()->cmd->pid)
+			exec(data()->cmd);
+		close(data()->cmd->fd[1]);
+		dup2(data()->cmd->fd[0], STDIN_FILENO);
+		data()->cmd = data()->cmd->next;
+	}
+	while (data()->cmd)
+	{
+		waitpid(data()->cmd->pid, 0, 0);
+		data()->cmd = data()->cmd->next;
 	}
 	return (0);
 }

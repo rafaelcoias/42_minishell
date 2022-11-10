@@ -15,15 +15,13 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)cd_command.c	\
 		$(SRC_PATH)echo_command.c	\
 		$(SRC_PATH)env_command.c	\
-		$(SRC_PATH)exit_command.c	\
 		$(SRC_PATH)export_command.c	\
 		$(SRC_PATH)pwd_command.c	\
 		$(SRC_PATH)unset_command.c	\
 		$(SRC_PATH)handle_ctrl.c	\
 		$(SRC_PATH)handle_quotes.c	\
-		$(SRC_PATH)handle_command.c	\
-		$(SRC_PATH)command_exec.c	\
-		$(SRC_PATH)command_path.c	\
+		$(SRC_PATH)execute.c		\
+		$(SRC_PATH)command_info.c	\
 		$(SRC_PATH)error_msg.c		\
 
 ########## 		  INCLUDES 		##########

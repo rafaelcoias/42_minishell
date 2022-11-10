@@ -20,21 +20,22 @@
  *
  *	*/
 
-void	echo_command(t_data *data)
+void	echo_command(char **args)
 {
 	int	i;
 
 	i = 1;
-	if (data->cmd[i] && !ft_strcmp(data->cmd[i], "-n"))
+	if (args[i] && !ft_strcmp(args[i], "-n"))
 	{
 		i++;
-		while (data->cmd[i])
-			ft_printf("%s ", data->cmd[i++]);
+		while (args[i])
+			ft_printf("%s ", args[i++]);
 	}
 	else
 	{
-		while (data->cmd[i])
-			ft_printf("%s ", data->cmd[i++]);
+		while (args[i])
+			ft_printf("%s ", args[i++]);
 		ft_putchar_fd('\n', 1);
 	}
+	exit(0);
 }
