@@ -39,15 +39,15 @@ static int redirect_output(t_data *data)
   path with the get_cmd_path() function.
 */
 
-static int	execute(t_data *data, int i)
+static void	execute(t_data *data, int i)
 {
 	close(data->pipe_fd[0]);
 	dup2(data->pipe_fd[1], STDOUT_FILENO);
 	if (redirect_output(data))
 		dup2(data->outfile_fd, STDOUT_FILENO);
 	if (execve(get_cmd_path(data), &data->pipes[i], data->envp) == -1)
-		return (error_msg(EXEC_ERROR));
-	return (0);
+		error_msg(EXEC_ERROR);
+	exit(0);
 }
 
 /*	This function runs every command until
@@ -84,7 +84,7 @@ int	handle_pipe(t_data *data)
 		if (pid_child == -1)
 			error_msg(FORK_ERROR);
 		if (!pid_child)
-			return (execute(data, i));
+			execute(data, i);
 		close(data->pipe_fd[1]);
 		waitpid(pid_child, 0, 0);
 		dup2(data->pipe_fd[0], STDIN_FILENO);

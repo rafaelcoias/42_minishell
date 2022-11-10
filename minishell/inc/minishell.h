@@ -51,19 +51,23 @@
 
 /*	LISTS	*/
 
+typedef struct s_cmd
+{
+	char	*path;
+	char	**args;
+	int		cmd_index;
+	int		fd[2];
+	struct s_cmd	*next;
+}	t_cmd;
+
 typedef struct s_data
 {
+	char	*home_path;
 	char	**envp;
 	char	**env_path;
 	char	**pipes;
-	int	pipe_fd[2];
-	int	infile_fd;
-	int	outfile_fd;
-	char	**cmd;
-	char	*cmd_path;
-	int		cmd_index;
-	char	*home_path;
-	int	exit;
+	int		exit;
+	t_cmd	*cmd;
 }	t_data;
 
 
@@ -71,8 +75,9 @@ typedef struct s_data
 
 /* MAIN */
 
+t_data	*data();
 void	read_command(t_data *data);
-int	error_msg(char *str);
+int		error_msg(char *str);
 
 /* HANDLE COMMAND */
 
@@ -83,5 +88,9 @@ int	handle_pipe(t_data *data);
 
 void	pwd_command();
 void	echo_command(t_data *data);
+
+/* SIGNALS */
+
+void    signal_handler();
 
 #endif

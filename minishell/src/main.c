@@ -29,6 +29,12 @@ static void	free_all(t_data *data)
 	(void)data;
 }
 
+t_data	*data()
+{
+	static t_data	data;
+	return (&data);
+}
+
 
 /*	When minishell starts it will always ask for
  * the users input.
@@ -45,19 +51,19 @@ static void	free_all(t_data *data)
  * */
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	data;
 	char		*input;
 
 	(void)argc;
 	(void)argv;
-	data.envp = envp;
-	data.exit = 0;
-	get_env_path(&data);
-	while (!data.exit)
+	signal_handler();
+	data()->envp = envp;
+	data()->exit = 0;
+	get_env_path(data());
+	while (!data()->exit)
 	{
 		input = readline(PROMPT);
-		data.pipes = ft_split(input, '|');
-		read_command(&data);
+		add_history(input);
+		read_command(data());
 		free(input);
 	}
 	free_all(&data);
