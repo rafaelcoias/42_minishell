@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-		//parser(input);
+		parser(input);
 		if (!create_commands())
 			execute();
 		free_all(input);

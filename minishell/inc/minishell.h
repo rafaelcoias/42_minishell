@@ -100,7 +100,7 @@ void	check_builtins(t_cmd *cmd);
 /* COMMANDS */
 
 void	pwd_command(void);
-void	echo_command(void);
+void	echo_command(char **args);
 void	cd_command(char **args);
 
 /* SIGNALS */
