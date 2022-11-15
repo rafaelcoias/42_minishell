@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/12 00:45:33 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/11/15 16:54:06 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_token
 typedef struct s_data
 {
 	char	*home_path;
+	char	*oldpwd;
 	char	**envp;
 	char	**env_path;
 	int		fd_in;

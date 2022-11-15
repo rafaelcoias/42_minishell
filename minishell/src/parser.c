@@ -42,9 +42,13 @@ void    parser(char *input)
 	int     i;
 	int     ti;
 	char    *token[BUFFER];
+	t_token	*tmp;
+	int		first;
 	
 	i = 0;
 	ti = 0;
+	first = 1;
+	tmp = data()->token;
 	while (input[i])
 	{
 		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
@@ -52,8 +56,19 @@ void    parser(char *input)
 		handle_quotes(&input[i], &token[ti]);
 		data()->token = malloc(sizeof(t_token));
 		data()->token->word = token[ti];
+		if (first)
+		{
+			tmp = data()->token;
+			first = 0;
+		}
 		data()->token = data()->token->next;
 		ti++;
 		i++;
 	}
+	data()->token = tmp;
 }
+
+//int	main(int argc, char **argv)
+//{
+//	parser(argv);
+//}
