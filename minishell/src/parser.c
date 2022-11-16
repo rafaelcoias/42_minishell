@@ -20,14 +20,28 @@ int	check_quotes(char *input, char **token, char c, int j)
 	i = 0;
 	if (c != ' ')
 		str[i++] = c;
-	while (input[j] && (input[j] != c || (c != ' ' && input[j + 1] && input[j + 1] != ' ')))
+	while (input[j] && (input[j] != c))
 	{
 		str[i] = input[j];
 		i++;
 		j++;
 	}
-	if (c != ' ')
-		str[i++] = c;
+	//if (input[j] != ' ')
+	//{
+	while (input[j] && input[j] != ' ')
+	{
+		str[i] = input[j];
+		i++;
+		j++;
+	}
+	if (input[j] != ' ')
+	{
+		str[i] = input[j];
+		i++;
+		j++;
+	}
+	//if (c != ' ')
+	//	str[i++] = c;
 	str[i] = '\0';
 	*token = str;
 	return (j);
