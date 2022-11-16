@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/15 20:30:35 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:45:45 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void    set_pwd(char    *pwd)
 {
     int i;
     
-    i = 0;  
-    while (data()->envp)
+    i = 0;
+    data()->env_path == getent();
+    while (data()->env_path)
     {
-        while (data()->envp[i][0] != 'O' && data()->envp[i][1] != 'L')
+        while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
             i++;
-        data()->envp[i] = pwd;
+        data()->env_path[i] = pwd;
     }
 }
 
@@ -32,9 +33,9 @@ void    env_command()
     i = 0;
     while (data()->envp)
     {
-        while (data()->envp[i][0] != 'O' && data()->envp[i][1] != 'L')
+        while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
             i++;
-        data()->envp[i] = data()->oldpwd;
+        data()->env_path[i] = data()->oldpwd;
         set_pwd(getenv("PWD"));
     }
 }

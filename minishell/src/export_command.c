@@ -3,11 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   export_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:51 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/10 12:53:47 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:48:35 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+/*printar getenv com todas as linhas com =*/

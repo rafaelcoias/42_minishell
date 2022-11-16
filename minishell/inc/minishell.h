@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 18:16:50 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:42:21 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-typedef struct s_token
-{
-	struct s_token	*begin;
-	char			*word;
-	struct s_token	*next;
-	struct s_token	*end;
-}	t_token;
+//typedef struct s_token
+//{
+//	struct s_token	*begin;
+//	char			*word;
+//	struct s_token	*next;
+//	struct s_token	*end;
+//}	t_token;
 
 typedef struct s_data
 {
