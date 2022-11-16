@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 18:10:52 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/15 20:27:36 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:33:38 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-		parser(input);
-		if (!create_commands())
+		if (!parser(input) && !create_commands())
 			execute();
 		free_all(input);
 	}

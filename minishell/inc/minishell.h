@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/15 16:54:06 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:22:08 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ typedef struct s_cmd
 
 typedef struct s_token
 {
+	struct s_token	*begin;
 	char			*word;
 	struct s_token	*next;
+	struct s_token	*end;
 }	t_token;
 
 typedef struct s_data
@@ -88,7 +90,7 @@ typedef struct s_data
 /* MAIN */
 
 t_data	*data(void);
-void	parser(char *input);
+int		parser(char *input);
 int		create_commands(void);
 int		execute(void);
 int		error_msg(char *str);
