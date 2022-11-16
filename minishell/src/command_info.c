@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_path.c                                     :+:      :+:    :+:   */
+/*   command_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:46 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/12 00:40:38 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:05:17 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
  *	the command is invalid and return an error.
  * */
 
-static char	*get_cmd_path(char *cmd)
+char	*get_cmd_path(char *cmd)
 {
 	char	*add_slash;
 	char	*path;
@@ -55,30 +55,59 @@ static char	*get_cmd_path(char *cmd)
 }
 
 /*	Creates a command based on the tokens */
+t_cmd *new_cmd()
+{
+	t_cmd *cmd;
+
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	return (cmd);
+}
+
+int equas(const char *a, const char *b)
+{
+	if (a == NULL || b == NULL)
+		return (0);
+	while (*a && b && *a == *b )
+	{
+		a++;
+		b++;
+	}
+	return (*a == *b);
+}
 
 int	create_commands(void)
 {
 	int	i;
+	int	j;
+	t_cmd *end;
 
-	while (data()->token)
-	{
-		data()->cmd = malloc(sizeof(t_cmd));
+	j = -1;
+	i = 0;
+	data()->cmd = NULL;
+	while (data()->token[++j])
+	{	
+		if (equas(data()->token[j], "|"))
+		{
+			
+			i = 0;
+			if (!data()->cmd )
+				continue;
+			end->next = new_cmd();
+			end = end->next;
+			continue;
+		}
 		if (!data()->cmd)
-			return (error_msg(MLC_ERROR));
-		data()->cmd->path = get_cmd_path(data()->token->word);
-		if (!data()->cmd->path)
-		{
-			error_msg(CMD_ERROR);
-			break ;
+		{	
+			data()->cmd = new_cmd();
+			end = data()->cmd;		
 		}
-		i = 0;
-		while (data()->token && ft_strcmp(data()->token->word, "|"))
-		{
-			data()->cmd->args[i++] = data()->token->word;
-			data()->token = data()->token->next;
-		}
-		data()->cmd->args[i] = NULL;
-		data()->token = data()->token->next;
+	
+		if (i == 0)
+			end->path = get_cmd_path(data()->token[j]);
+		end->args[i++] = data()->token[j];
+		
 	}
+	
+		
 	return (0);
 }

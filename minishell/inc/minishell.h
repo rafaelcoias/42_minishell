@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 16:22:08 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:16:50 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@
 
 /*	LISTS	*/
 
+
+
 typedef struct s_cmd
 {
 	char			*path;
-	char			**args;
+	char			*args[BUFFER];
 	pid_t			pid;
 	int				fd[2];
 	struct s_cmd	*next;
@@ -80,7 +82,7 @@ typedef struct s_data
 	int		fd_in;
 	int		fd_out;
 	int		exit;
-	t_token	*token;
+	char 	*token[BUFFER];
 	t_cmd	*cmd;
 }	t_data;
 
