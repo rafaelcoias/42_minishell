@@ -53,8 +53,6 @@
 
 /*	LISTS	*/
 
-
-
 typedef struct s_cmd
 {
 	char			*path;
@@ -76,7 +74,6 @@ typedef struct s_data
 	char	*token[BUFFER];
 	t_cmd	*cmd;
 }	t_data;
-
 
 /*	FUNCTIONS */
 

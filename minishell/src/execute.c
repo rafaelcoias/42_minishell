@@ -30,14 +30,14 @@ static int heredoc()
 	return (0);
 }*/
 
-/*	
- 	Execute is the function that executes any
- 	command.
- 
+/*
+	Execute is the function that executes any
+	command.
+
   First it closes the read/input side of the pipe
   and then it changes the fd of the write/output
   side of the pipe.
- 
+
   If there is an output redirection ">" or ">>"
   dup2() is used on the outfile fd.
 
@@ -45,14 +45,26 @@ static int heredoc()
   path with the get_cmd_path() function.
 */
 
-static void	exec(t_cmd *cmd)
+static void	exec(t_cmd *cmd, int in, int out)
 {
-	close(data()->cmd->fd[0]);
-	dup2(data()->cmd->fd[1], STDOUT_FILENO);
-	check_builtins(cmd);
-	if (execve(cmd->path, cmd->args, data()->envp) == -1)
-		error_msg(EXEC_ERROR);
-	exit(0);
+	cmd->pid = fork();
+	if (!cmd->pid)
+	{
+		dup2(out, 1);
+		if (out != 1)
+			close(out);
+		if (in != 0)
+			close(in);
+		dup2(in, 0);
+		check_builtins(cmd);
+		if (execve(cmd->path, cmd->args, data()->envp) == -1)
+			error_msg(EXEC_ERROR);
+		exit(0);
+	}
+	if (in != 0)
+		close(in);
+	if (out != 1)
+		close(out);
 }
 
 static void	wait_childs(void)
@@ -78,27 +90,32 @@ static void	wait_childs(void)
  *	function. The command line equivalent to
  *	that pipe is executed in the exec() function.
  *
- *	close() function are used to always close 
+ *	close() function are used to always close
  *	the fd of the write/output side of the pipe.
  *
  *	dup2() function is used to change the fd
  *	of the read/input side of the pipe.
  * */
-
 int	execute(void)
 {
 	t_cmd	*tmp;
+	int		fd_in;
+	int		index;
 
+	fd_in = 0;
+	index = 0;
 	tmp = data()->cmd;
 	while (tmp)
 	{
-		tmp->pid = fork();
-		if (pipe(tmp->fd) == -1)
+		if (index++ == 0)
+		{
+			tmp->fd[0] = 0;
+			tmp->fd[1] = 1;
+		}
+		else if (pipe(tmp->fd) == -1)
 			return (error_msg(PIPE_ERROR));
-		if (!tmp->pid)
-			exec(tmp);
-		close(tmp->fd[1]);
-		dup2(tmp->fd[0], STDIN_FILENO);
+		exec(tmp, fd_in, tmp->fd[1]);
+		fd_in = tmp->fd[0];
 		tmp = tmp->next;
 	}
 	wait_childs();

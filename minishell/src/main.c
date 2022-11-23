@@ -33,15 +33,19 @@ static void	get_env_path(void)
 	And frees input
  */
 
-static void	free_all(char *input)
+void	free_all(char *input)
 {
 	t_cmd	*aux;
+	t_cmd	*temp;
 
-	while (data()->cmd)
+	aux = data()->cmd;
+	while (aux)
 	{
-		aux = data()->cmd->next;
-		free(data()->cmd);
-		data()->cmd = aux;
+		temp = data()->cmd->next;
+		//ft_free_mtx(aux->args);
+		free(aux->path);
+		free(aux);
+		aux = temp;
 	}
 	free(input);
 }

@@ -85,7 +85,7 @@ int	create_commands(void)
 	i = 0;
 	data()->cmd = NULL;
 	while (data()->token[++j])
-	{	
+	{
 		if (equas(data()->token[j], "|"))
 		{
 			i = 0;
