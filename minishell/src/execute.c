@@ -55,6 +55,18 @@ static void	exec(t_cmd *cmd)
 	exit(0);
 }
 
+static void	wait_childs(void)
+{
+	t_cmd	*tmp;
+
+	tmp = data()->cmd;
+	while (tmp)
+	{
+		waitpid(tmp->pid, 0, 0);
+		tmp = tmp->next;
+	}
+}
+
 /*	This function runs every command until
  *	there are no commands (pipes) left.
  *
@@ -75,21 +87,20 @@ static void	exec(t_cmd *cmd)
 
 int	execute(void)
 {
-	while (data()->cmd)
+	t_cmd	*tmp;
+
+	tmp = data()->cmd;
+	while (tmp)
 	{
-		data()->cmd->pid = fork();
-		if (pipe(data()->cmd->fd) == -1)
+		tmp->pid = fork();
+		if (pipe(tmp->fd) == -1)
 			return (error_msg(PIPE_ERROR));
-		if (!data()->cmd->pid)
-			exec(data()->cmd);
-		close(data()->cmd->fd[1]);
-		dup2(data()->cmd->fd[0], STDIN_FILENO);
-		data()->cmd = data()->cmd->next;
+		if (!tmp->pid)
+			exec(tmp);
+		close(tmp->fd[1]);
+		dup2(tmp->fd[0], STDIN_FILENO);
+		tmp = tmp->next;
 	}
-	while (data()->cmd)
-	{
-		waitpid(data()->cmd->pid, 0, 0);
-		data()->cmd = data()->cmd->next;
-	}
+	wait_childs();
 	return (0);
 }

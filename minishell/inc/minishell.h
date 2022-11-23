@@ -34,7 +34,7 @@
 /*	DEFINES */
 
 # define BUFFER 1024
-# define PROMPT CYAN"minishell"RED" ~ "	RESET
+# define PROMPT CYAN"minishell"RED" ~ "RESET
 # define PWD_CMD "pwd"
 # define ECHO_CMD "echo"
 # define EXIT_CMD "exit"
@@ -45,11 +45,10 @@
 
 /* ERROR	*/
 
-# define CMD_ERROR RED"Error : "YELLOW"Invalid command"RESET
 # define PIPE_ERROR RED"Error : "YELLOW"Creating pipe"RESET
-# define FORK_ERROR RED"Error : "YELLOW"Creating fork"RESET
+# define FORK_ERROR RED"Error : "YELLOW"Creating process"RESET
 # define MLC_ERROR RED"Error : "YELLOW"Allocation failed"RESET
-# define EXEC_ERROR RED"Error : "YELLOW"Executing command"RESET
+# define EXEC_ERROR RED"Error : "YELLOW"Invalid command"RESET
 # define DIR_ERROR RED"Error : "YELLOW"Directory does not exists"RESET
 
 /*	LISTS	*/
@@ -65,14 +64,6 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-//typedef struct s_token
-//{
-//	struct s_token	*begin;
-//	char			*word;
-//	struct s_token	*next;
-//	struct s_token	*end;
-//}	t_token;
-
 typedef struct s_data
 {
 	char	*home_path;
@@ -82,7 +73,7 @@ typedef struct s_data
 	int		fd_in;
 	int		fd_out;
 	int		exit;
-	char 	*token[BUFFER];
+	char	*token[BUFFER];
 	t_cmd	*cmd;
 }	t_data;
 

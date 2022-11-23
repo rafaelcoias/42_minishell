@@ -12,31 +12,31 @@
 
 #include "../inc/minishell.h"
 
-void    set_pwd(char    *pwd)
-{
-    int i;
-    
-    i = 0;
-    data()->env_path == getent();
-    while (data()->env_path)
-    {
-        while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
-            i++;
-        data()->env_path[i] = pwd;
-    }
-}
+// void	set_pwd(char	*pwd)
+// {
+// 	int	i;
 
-void    env_command()
-{
-    int     i;
-    
-    i = 0;
-    while (data()->envp)
-    {
-        while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
-            i++;
-        data()->env_path[i] = data()->oldpwd;
-        set_pwd(getenv("PWD"));
-    }
-}
+// 	i = 0;
+// 	data()->env_path = getent();
+// 	while (data()->env_path)
+// 	{
+// 		while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
+// 			i++;
+// 		data()->env_path[i] = pwd;
+// 	}
+// }
+
+// void	env_command(void)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (data()->envp)
+// 	{
+// 		while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
+// 			i++;
+// 		data()->env_path[i] = data()->oldpwd;
+// 		set_pwd(getenv("PWD"));
+// 	}
+// }
 

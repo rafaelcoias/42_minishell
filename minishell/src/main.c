@@ -30,12 +30,19 @@ static void	get_env_path(void)
 }
 
 /*	Free everything in data list
+	And frees input
  */
 
 static void	free_all(char *input)
 {
-	// ft_freelst(data()->token);
-	// ft_freelst(data()->cmd);
+	t_cmd	*aux;
+
+	while (data()->cmd)
+	{
+		aux = data()->cmd->next;
+		free(data()->cmd);
+		data()->cmd = aux;
+	}
 	free(input);
 }
 
@@ -49,7 +56,7 @@ static void	free_all(char *input)
  *	and after executing the command it frees the input
  *	to do all over again.
  *
- *	If user writes the eit command, the program frees
+ *	If user writes the exit command, the program frees
  *	everything and ends.
  * */
 int	main(int argc, char **argv, char **envp)
@@ -67,10 +74,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-		parser(input);
-		create_commands();
-		/*if (!parser(input) && !create_commands())
-			execute();*/
+		if (!parser(input) && !create_commands())
+			execute();
 		free_all(input);
 	}
 	return (0);

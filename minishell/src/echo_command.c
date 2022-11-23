@@ -37,5 +37,4 @@ void	echo_command(char **args)
 			ft_printf("%s ", args[i++]);
 		ft_putchar_fd('\n', 1);
 	}
-	exit(0);
 }

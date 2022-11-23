@@ -20,5 +20,4 @@ void	pwd_command(void)
 
 	getcwd(path, BUFFER);
 	ft_printf("%s\n", path);
-	exit(0);
 }

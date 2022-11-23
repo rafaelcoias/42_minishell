@@ -21,5 +21,4 @@ void	cd_command(char **args)
 		data()->oldpwd = getenv("PWD");
 		chdir(data()->home_path);
 	}
-	exit(0);
 }

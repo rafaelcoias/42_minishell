@@ -55,15 +55,15 @@ char	*get_cmd_path(char *cmd)
 }
 
 /*	Creates a command based on the tokens */
-t_cmd *new_cmd()
+t_cmd	*new_cmd(void)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	return (cmd);
 }
 
-int equas(const char *a, const char *b)
+int	equas(const char *a, const char *b)
 {
 	if (a == NULL || b == NULL)
 		return (0);
@@ -77,9 +77,9 @@ int equas(const char *a, const char *b)
 
 int	create_commands(void)
 {
-	int	i;
-	int	j;
-	t_cmd *end;
+	int		i;
+	int		j;
+	t_cmd	*end;
 
 	j = -1;
 	i = 0;
@@ -88,26 +88,21 @@ int	create_commands(void)
 	{	
 		if (equas(data()->token[j], "|"))
 		{
-			
 			i = 0;
-			if (!data()->cmd )
-				continue;
+			if (!data()->cmd)
+				continue ;
 			end->next = new_cmd();
 			end = end->next;
-			continue;
+			continue ;
 		}
 		if (!data()->cmd)
 		{	
 			data()->cmd = new_cmd();
-			end = data()->cmd;		
+			end = data()->cmd;
 		}
-	
 		if (i == 0)
 			end->path = get_cmd_path(data()->token[j]);
 		end->args[i++] = data()->token[j];
-		
 	}
-	
-		
 	return (0);
 }
