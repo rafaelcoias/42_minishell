@@ -29,25 +29,12 @@ static void	get_env_path(void)
 	data()->env_path = ft_split(&path[5], ':');
 }
 
-/*	Free everything in data list
-	And frees input
- */
-
-void	free_all(char *input)
+static void init_all(char **envp)
 {
-	t_cmd	*aux;
-	t_cmd	*temp;
-
-	aux = data()->cmd;
-	while (aux)
-	{
-		temp = data()->cmd->next;
-		//ft_free_mtx(aux->args);
-		free(aux->path);
-		free(aux);
-		aux = temp;
-	}
-	free(input);
+	data()->envp = envp;
+	data()->exit = 0;
+	data()->home_path = getenv("HOME");
+	get_env_path();
 }
 
 /*	When minishell starts it will always ask for
@@ -70,10 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	signal_handler();
-	data()->envp = envp;
-	data()->exit = 0;
-	data()->home_path = getenv("HOME");
-	get_env_path();
+	init_all(envp);
 	while (!data()->exit)
 	{
 		input = readline(PROMPT);

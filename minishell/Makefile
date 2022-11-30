@@ -23,7 +23,8 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)command_info.c	\
 		$(SRC_PATH)check_builtins.c	\
 		$(SRC_PATH)error_msg.c		\
-		$(SRC_PATH)parser.c
+		$(SRC_PATH)parser.c			\
+		$(SRC_PATH)free_all.c
 
 ########## 		  INCLUDES 		##########
 

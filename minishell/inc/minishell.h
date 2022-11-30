@@ -50,6 +50,7 @@
 # define MLC_ERROR RED"Error : "YELLOW"Allocation failed"RESET
 # define EXEC_ERROR RED"Error : "YELLOW"Invalid command"RESET
 # define DIR_ERROR RED"Error : "YELLOW"Directory does not exists"RESET
+# define OPEN_ERROR RED"Error : "YELLOW"Can not open file or directory"RESET
 
 /*	LISTS	*/
 
@@ -59,6 +60,8 @@ typedef struct s_cmd
 	char			*args[BUFFER];
 	pid_t			pid;
 	int				fd[2];
+	int				fd_in;
+	int				fd_out;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -68,9 +71,8 @@ typedef struct s_data
 	char	*oldpwd;
 	char	**envp;
 	char	**env_path;
-	int		fd_in;
-	int		fd_out;
 	int		exit;
+	int		fd_heredoc;
 	char	*token[BUFFER];
 	t_cmd	*cmd;
 }	t_data;
@@ -84,6 +86,7 @@ int		parser(char *input);
 int		create_commands(void);
 int		execute(void);
 int		error_msg(char *str);
+void	free_all(char *input);
 
 /* HANDLE COMMAND */
 

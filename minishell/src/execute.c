@@ -12,23 +12,13 @@
 
 #include "../inc/minishell.h"
 
-/*
-static int redirect_input()
+static void close_fds(int in, int out)
 {
-	dup2(data()->fd_in, STDIN_FILENO);
-	return (0);
+	if (in != 0)
+		close(in);
+	if (out != 1)
+		close(out);
 }
-
-static int redirect_output()
-{
-	dup2(data()->fd_out, STDOUT_FILENO);
-	return (0);
-}
-
-static int heredoc()
-{
-	return (0);
-}*/
 
 /*
 	Execute is the function that executes any
@@ -51,20 +41,14 @@ static void	exec(t_cmd *cmd, int in, int out)
 	if (!cmd->pid)
 	{
 		dup2(out, 1);
-		if (out != 1)
-			close(out);
-		if (in != 0)
-			close(in);
+		close_fds(in, out);
 		dup2(in, 0);
 		check_builtins(cmd);
 		if (execve(cmd->path, cmd->args, data()->envp) == -1)
 			error_msg(EXEC_ERROR);
 		exit(0);
 	}
-	if (in != 0)
-		close(in);
-	if (out != 1)
-		close(out);
+	close_fds(in, out);
 }
 
 static void	wait_childs(void)
