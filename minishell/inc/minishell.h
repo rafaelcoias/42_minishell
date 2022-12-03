@@ -54,6 +54,13 @@
 
 /*	LISTS	*/
 
+typedef struct s_pwd
+{
+	struct s_pwd	*last;
+	char			*pwd;
+	struct s_pwd	*next;
+}	t_pwd;
+
 typedef struct s_cmd
 {
 	char			*path;

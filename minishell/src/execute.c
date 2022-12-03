@@ -40,9 +40,9 @@ static void	exec(t_cmd *cmd, int in, int out)
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
-		dup2(out, 1);
+		dup2(out, STDOUT_FILENO);
+		dup2(in, STDIN_FILENO);
 		close_fds(in, out);
-		dup2(in, 0);
 		check_builtins(cmd);
 		if (execve(cmd->path, cmd->args, data()->envp) == -1)
 			error_msg(EXEC_ERROR);
@@ -86,15 +86,15 @@ int	execute(void)
 	int		fd_in;
 	int		index;
 
-	fd_in = 0;
 	index = 0;
+	fd_in = STDIN_FILENO;
 	tmp = data()->cmd;
 	while (tmp)
 	{
 		if (index++ == 0)
 		{
-			tmp->fd[0] = 0;
-			tmp->fd[1] = 1;
+			tmp->fd[0] = STDIN_FILENO;
+			tmp->fd[1] = STDOUT_FILENO;
 		}
 		else if (pipe(tmp->fd) == -1)
 			return (error_msg(PIPE_ERROR));
