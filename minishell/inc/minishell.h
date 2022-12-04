@@ -78,6 +78,7 @@ typedef struct s_data
 	char	*oldpwd;
 	char	**envp;
 	char	**env_path;
+	int		npipes;
 	int		exit;
 	int		fd_heredoc;
 	char	*token[BUFFER];

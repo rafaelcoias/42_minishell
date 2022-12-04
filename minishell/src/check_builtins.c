@@ -28,8 +28,6 @@ void	check_builtins(t_cmd *cmd)
 		echo_command(cmd->args);
 	else if (!ft_strcmp(cmd->args[0], CD_CMD))
 		cd_command(cmd->args);
-	else if (!ft_strcmp(cmd->args[0], EXIT_CMD))
-		data()->exit = 1;
 	else
 		return ;
 	exit(0);

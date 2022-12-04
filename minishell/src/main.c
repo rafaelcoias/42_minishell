@@ -33,6 +33,7 @@ static void init_all(char **envp)
 {
 	data()->envp = envp;
 	data()->exit = 0;
+	data()->npipes = 0;
 	data()->home_path = getenv("HOME");
 	get_env_path();
 }
@@ -61,10 +62,14 @@ int	main(int argc, char **argv, char **envp)
 	while (!data()->exit)
 	{
 		input = readline(PROMPT);
+		if (input && !ft_strncmp(input, EXIT_CMD, 4))
+			exit(0);
 		add_history(input);
-		if (!parser(input) && !create_commands())
+		if (input && !parser(input) && !create_commands())
+		{
 			execute();
-		free_all(input);
+			free_all(input);
+		}
 	}
 	return (0);
 }

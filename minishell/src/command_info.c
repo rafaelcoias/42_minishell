@@ -60,6 +60,9 @@ t_cmd	*new_cmd(void)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
+	cmd->fd_in = 0;
+	cmd->fd_out = 1;
+	cmd->path = NULL;
 	return (cmd);
 }
 
@@ -89,9 +92,11 @@ int	create_commands(void)
 		if (equas(data()->token[j], "|"))
 		{
 			i = 0;
+			data()->npipes++;
 			if (!data()->cmd)
 				continue ;
 			end->next = new_cmd();
+			
 			end = end->next;
 			continue ;
 		}

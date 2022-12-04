@@ -20,20 +20,17 @@ static void close_fds(int in, int out)
 		close(out);
 }
 
-/*
-	Execute is the function that executes any
-	command.
+static void	wait_childs(void)
+{
+	t_cmd	*tmp;
 
-  First it closes the read/input side of the pipe
-  and then it changes the fd of the write/output
-  side of the pipe.
-
-  If there is an output redirection ">" or ">>"
-  dup2() is used on the outfile fd.
-
-  Finally, it executes the command by getting its
-  path with the get_cmd_path() function.
-*/
+	tmp = data()->cmd;
+	while (tmp)
+	{
+		waitpid(tmp->pid, 0, 0);
+		tmp = tmp->next;
+	}
+}
 
 static void	exec(t_cmd *cmd, int in, int out)
 {
@@ -51,35 +48,6 @@ static void	exec(t_cmd *cmd, int in, int out)
 	close_fds(in, out);
 }
 
-static void	wait_childs(void)
-{
-	t_cmd	*tmp;
-
-	tmp = data()->cmd;
-	while (tmp)
-	{
-		waitpid(tmp->pid, 0, 0);
-		tmp = tmp->next;
-	}
-}
-
-/*	This function runs every command until
- *	there are no commands (pipes) left.
- *
- *	If there is an input redirection "<", then
- *	the fd of the file pointed to by "<" is changed
- *	to be the input of the first command.
- *
- *	After that, a pipe is created using the pipe
- *	function. The command line equivalent to
- *	that pipe is executed in the exec() function.
- *
- *	close() function are used to always close
- *	the fd of the write/output side of the pipe.
- *
- *	dup2() function is used to change the fd
- *	of the read/input side of the pipe.
- * */
 int	execute(void)
 {
 	t_cmd	*tmp;
@@ -91,13 +59,13 @@ int	execute(void)
 	tmp = data()->cmd;
 	while (tmp)
 	{
+		if (pipe(tmp->fd) == -1)
+			return (error_msg(PIPE_ERROR));
 		if (index++ == 0)
 		{
 			tmp->fd[0] = STDIN_FILENO;
 			tmp->fd[1] = STDOUT_FILENO;
 		}
-		else if (pipe(tmp->fd) == -1)
-			return (error_msg(PIPE_ERROR));
 		exec(tmp, fd_in, tmp->fd[1]);
 		fd_in = tmp->fd[0];
 		tmp = tmp->next;
@@ -105,3 +73,73 @@ int	execute(void)
 	wait_childs();
 	return (0);
 }
+
+// static void close_fds(int in, int out)
+// {
+// 	if (in != 0)
+// 		close(in);
+// 	if (out != 1)
+// 		close(out);
+// }
+
+// static void change_fds(int in, int out)
+// {
+// 	(void)in;
+// 	// dup2(in, STDIN_FILENO);
+// 	dup2(out, STDOUT_FILENO);
+// }
+
+// static void	wait_childs(void)
+// {
+// 	t_cmd	*tmp;
+
+// 	tmp = data()->cmd;
+// 	while (tmp)
+// 	{
+// 		waitpid(tmp->pid, 0, 0);
+// 		tmp = tmp->next;
+// 	}
+// }
+
+// static int	exec(t_cmd *cmd, int index)
+// {
+// 	cmd->pid = fork();
+// 	if (cmd->pid == -1)
+// 		return (error_msg(FORK_ERROR));
+// 	if (!cmd->pid)
+// 	{
+// 		if (index == 0)
+// 			change_fds(0, cmd->fd[1]);
+// 		else if (index + 1 == data()->npipes)
+// 			change_fds(cmd->fd[0], 1);
+// 		else
+// 			change_fds(cmd->fd[0], cmd->fd[1]);
+// 		close_fds(cmd->fd[0], cmd->fd[1]);
+// 		check_builtins(cmd);
+// 		if (execve(cmd->path, cmd->args, data()->envp) == -1)
+// 			error_msg(EXEC_ERROR);
+// 		exit(0);
+// 	}
+// 	close_fds(cmd->fd[0], cmd->fd[1]);
+// 	return (0);
+// }
+
+// int	execute(void)
+// {
+// 	int		index;
+// 	t_cmd	*tmp;
+
+// 	index = 0;
+// 	tmp = data()->cmd;
+// 	while (tmp)
+// 	{
+// 		if (data()->npipes && pipe(tmp->fd) == -1)
+// 			return (error_msg(PIPE_ERROR));
+// 		exec(tmp, index);
+// 		index++;
+// 		dup2(tmp->fd[1], STDIN_FILENO);
+// 		tmp = tmp->next;
+// 	}
+// 	wait_childs();
+// 	return (0);
+// }
