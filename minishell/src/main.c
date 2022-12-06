@@ -29,6 +29,8 @@ static void	get_env_path(void)
 	data()->env_path = ft_split(&path[5], ':');
 }
 
+// Allocar envp
+
 static void init_all(char **envp)
 {
 	data()->envp = envp;
@@ -61,15 +63,14 @@ int	main(int argc, char **argv, char **envp)
 	init_all(envp);
 	while (!data()->exit)
 	{
+		data()->npipes = 0;
 		input = readline(PROMPT);
 		if (input && !ft_strncmp(input, EXIT_CMD, 4))
 			exit(0);
 		add_history(input);
 		if (input && !parser(input) && !create_commands())
-		{
 			execute();
-			free_all(input);
-		}
+		free_all(input);
 	}
 	return (0);
 }

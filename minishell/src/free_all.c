@@ -12,24 +12,24 @@
 
 #include "../inc/minishell.h"
 
-static void free_tokens()
+static void	free_tokens(void)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (data()->token[i])
-        free(data()->token[i++]);
+	i = 0;
+	while (data()->token[i])
+		free(data()->token[i++]);
 }
 
-static void free_cmds()
+static void	free_cmds(void)
 {
-    t_cmd	*aux;
+	t_cmd	*aux;
 	t_cmd	*temp;
 
 	aux = data()->cmd;
 	while (aux)
 	{
-		temp = data()->cmd->next;
+		temp = aux->next;
 		free(aux->path);
 		free(aux);
 		aux = temp;
@@ -42,7 +42,9 @@ static void free_cmds()
 
 void	free_all(char *input)
 {
-	free_cmds();
-    free_tokens();
+	if (data()->cmd)
+		free_cmds();
+	if (data()->token[0])
+		free_tokens();
 	free(input);
 }

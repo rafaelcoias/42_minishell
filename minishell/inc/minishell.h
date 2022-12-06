@@ -66,7 +66,7 @@ typedef struct s_cmd
 	char			*path;
 	char			*args[BUFFER];
 	pid_t			pid;
-	int				fd[2];
+	int				pipe[2];
 	int				fd_in;
 	int				fd_out;
 	struct s_cmd	*next;
@@ -75,7 +75,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char	*home_path;
-	char	*oldpwd;
+	char	*oldpwd; 
 	char	**envp;
 	char	**env_path;
 	int		npipes;

@@ -70,7 +70,7 @@ int	equas(const char *a, const char *b)
 {
 	if (a == NULL || b == NULL)
 		return (0);
-	while (*a && b && *a == *b )
+	while (*a && b && *a == *b)
 	{
 		a++;
 		b++;
@@ -96,7 +96,6 @@ int	create_commands(void)
 			if (!data()->cmd)
 				continue ;
 			end->next = new_cmd();
-			
 			end = end->next;
 			continue ;
 		}
