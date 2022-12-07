@@ -14,11 +14,20 @@
 
 void	cd_command(char **args)
 {
-	if (args[1] && chdir(args[1]))
-		error_msg(DIR_ERROR);
+	t_pwd	*last_pwd;
+
+	if (!args[1])
+		chdir(data()->home_path);
 	else
 	{
-		data()->oldpwd = getenv("PWD");
-		chdir(data()->home_path);
+		last_pwd = data()->pwd;
+		data()->pwd->next = malloc(sizeof(t_pwd));
+		data()->pwd = data()->pwd->next;
+		data()->pwd->last = last_pwd;
+		chdir(args[1]);
+			//error_msg(DIR_ERROR);
+		printf("TESTE\n");
+		data()->pwd->pwd = getenv("PWD");
+		data()->pwd->next = NULL;
 	}
 }

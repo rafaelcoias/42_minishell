@@ -55,7 +55,7 @@ static void redirect_output(t_cmd *cmd, int i)
     dup2(cmd->fd_out, STDOUT_FILENO);
 }
 
-static void redirections(t_cmd *cmd)
+void redirections(t_cmd *cmd)
 {
     int i;
 

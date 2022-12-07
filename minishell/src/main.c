@@ -36,7 +36,11 @@ static void init_all(char **envp)
 	data()->envp = envp;
 	data()->exit = 0;
 	data()->npipes = 0;
+	data()->pwd = malloc(sizeof(t_pwd));
 	data()->home_path = getenv("HOME");
+	data()->pwd->last = NULL;
+	data()->pwd->pwd = data()->home_path;
+	data()->pwd->next = NULL;
 	get_env_path();
 }
 

@@ -43,6 +43,7 @@ static void	exec(t_cmd *cmd, int in, int out)
 		if (in != STDIN_FILENO)
 			dup2(in, STDIN_FILENO);
 		close_fds(in, out);
+		redirections(cmd);
 		check_builtins(cmd);
 		if (execve(cmd->path, cmd->args, data()->envp) == -1)
 			error_msg(EXEC_ERROR);

@@ -65,6 +65,7 @@ typedef struct s_cmd
 {
 	char			*path;
 	char			*args[BUFFER];
+	char			*exec_args[BUFFER];
 	pid_t			pid;
 	int				pipe[2];
 	int				fd_in;
@@ -75,7 +76,6 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char	*home_path;
-	char	*oldpwd; 
 	char	**envp;
 	char	**env_path;
 	int		npipes;
@@ -83,6 +83,7 @@ typedef struct s_data
 	int		fd_heredoc;
 	char	*token[BUFFER];
 	t_cmd	*cmd;
+	t_pwd	*pwd;
 }	t_data;
 
 /*	FUNCTIONS */
@@ -106,6 +107,8 @@ void	check_builtins(t_cmd *cmd);
 void	pwd_command(void);
 void	echo_command(char **args);
 void	cd_command(char **args);
+void	redirections(t_cmd *cmd);
+
 
 /* SIGNALS */
 

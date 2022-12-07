@@ -21,6 +21,7 @@ void	sigint_handler(int x)
 void	sigtstp_handler(int x)
 {
 	(void)x;
+	data()->exit = 1;
 	exit(0);
 }
 
