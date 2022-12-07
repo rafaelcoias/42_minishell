@@ -25,7 +25,8 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)error_msg.c		\
 		$(SRC_PATH)parser.c			\
 		$(SRC_PATH)free_all.c		\
-		$(SRC_PATH)redirections.c
+		$(SRC_PATH)redirections.c	\
+		$(SRC_PATH)expand_env.c
 
 ########## 		  INCLUDES 		##########
 

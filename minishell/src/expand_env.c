@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_command.c                                       :+:      :+:    :+:   */
+/*   echo_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 20:49:39 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 19:50:43 by gseco-lu         ###   ########.fr       */
+/*   Created: 2022/10/01 20:49:47 by rade-sar          #+#    #+#             */
+/*   Updated: 2022/10/11 23:17:35 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	cd_command(char **args)
+char	*expand_env(char *str)
 {
-	if (!args[1])
-		chdir(data()->home_path);
-	else
-		if (chdir(args[1]))
-			error_msg(DIR_ERROR);
+	return (NULL);
 }

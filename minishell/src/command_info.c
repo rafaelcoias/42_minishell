@@ -121,7 +121,7 @@ int	create_commands(void)
 		}
 		if (i == 0)
 			end->path = get_cmd_path(data()->token[j]);
-		end->args[i++] = data()->token[j];
+		end->args[i++] = expand_env(data()->token[j]);
 	}
 	save_exec_args();
 	return (0);

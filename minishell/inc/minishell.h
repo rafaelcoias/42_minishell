@@ -54,13 +54,6 @@
 
 /*	LISTS	*/
 
-typedef struct s_pwd
-{
-	struct s_pwd	*last;
-	char			*pwd;
-	struct s_pwd	*next;
-}	t_pwd;
-
 typedef struct s_cmd
 {
 	char			*path;
@@ -83,7 +76,6 @@ typedef struct s_data
 	int		fd_heredoc;
 	char	*token[BUFFER];
 	t_cmd	*cmd;
-	t_pwd	*pwd;
 }	t_data;
 
 /*	FUNCTIONS */
@@ -92,15 +84,16 @@ typedef struct s_data
 
 t_data	*data(void);
 int		parser(char *input);
-int		create_commands(void);
-int		execute(void);
+char	*expand_env(char *str);
 int		error_msg(char *str);
 void	free_all(char *input);
 
 /* HANDLE COMMAND */
 
+int		create_commands(void);
 int		handle_pipe(void);
 void	check_builtins(t_cmd *cmd);
+int		execute(void);
 
 /* COMMANDS */
 

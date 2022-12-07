@@ -16,7 +16,6 @@
 // Ctrl D
 // $USER = t
 // Converter Variaveis de Ambiente
-// Fazer cd command
 
 t_data	*data(void)
 {
@@ -40,11 +39,7 @@ void	init_all(char **envp)
 	data()->envp = envp;
 	data()->exit = 0;
 	data()->npipes = 0;
-	data()->pwd = malloc(sizeof(t_pwd));
 	data()->home_path = getenv("HOME");
-	data()->pwd->last = NULL;
-	data()->pwd->pwd = data()->home_path;
-	data()->pwd->next = NULL;
 	get_env_path();
 }
 
@@ -78,6 +73,8 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 		if (input && !parser(input) && !create_commands())
 			execute();
+		if (!input)
+			break ;
 		free_all(input);
 	}
 	return (0);
