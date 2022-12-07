@@ -12,7 +12,7 @@
 
 #include "../inc/minishell.h"
 
-static void	free_tokens(void)
+void	free_tokens(void)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ static void	free_tokens(void)
 		free(data()->token[i++]);
 }
 
-static void	free_cmds(void)
+void	free_cmds(void)
 {
 	t_cmd	*aux;
 	t_cmd	*temp;

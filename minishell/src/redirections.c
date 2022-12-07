@@ -12,12 +12,13 @@
 
 #include "../inc/minishell.h"
 
-static int heredoc(t_cmd *cmd, int i)
+int	heredoc(t_cmd *cmd, int i)
 {
-    char	*limiter;
+	char	*limiter;
 	char	*line;
 
-	data()->fd_heredoc = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	(data()->fd_heredoc) = open(".here_doc", O_CREAT | O_WRONLY \
+	| O_TRUNC, 0644);
 	if (data()->fd_heredoc == -1)
 		error_msg(OPEN_ERROR);
 	limiter = ft_strjoin(cmd->args[i + 1], "\n");
@@ -37,38 +38,40 @@ static int heredoc(t_cmd *cmd, int i)
 	return (1);
 }
 
-static void redirect_input(t_cmd *cmd, int i)
+void	redirect_input(t_cmd *cmd, int i)
 {
-    if (i != 0)
-    {
-	    cmd->fd_in = open(cmd->args[i - 1], O_RDONLY);
-        dup2(cmd->fd_in, STDIN_FILENO);
-    }
+	if (i != 0)
+	{
+		cmd->fd_in = open(cmd->args[i - 1], O_RDONLY);
+		dup2(cmd->fd_in, STDIN_FILENO);
+	}
 }
 
-static void redirect_output(t_cmd *cmd, int i)
+void	redirect_output(t_cmd *cmd, int i)
 {
-	if (!ft_strcmp(cmd->args[i], ">>") && cmd->args[i+1])
-		cmd->fd_out = open(cmd->args[i + 1], O_CREAT | O_WRONLY | O_APPEND, 0644);
-	else if (!ft_strcmp(cmd->args[i], ">") && cmd->args[i+1])
-		cmd->fd_out = open(cmd->args[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    dup2(cmd->fd_out, STDOUT_FILENO);
+	if (!ft_strcmp(cmd->args[i], ">>") && cmd->args[i + 1])
+		cmd->fd_out = open(cmd->args[i + 1], O_CREAT \
+		| O_WRONLY | O_APPEND, 0644);
+	else if (!ft_strcmp(cmd->args[i], ">") && cmd->args[i + 1])
+		cmd->fd_out = open(cmd->args[i + 1], O_CREAT \
+		| O_WRONLY | O_TRUNC, 0644);
+	dup2(cmd->fd_out, STDOUT_FILENO);
 }
 
-void redirections(t_cmd *cmd)
+void	redirections(t_cmd *cmd)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (cmd->args[i])
-    {
-        if (!ft_strcmp(cmd->args[i], "<<"))
-            heredoc(cmd, i);
-        else if (!ft_strcmp(cmd->args[i], "<"))
-            redirect_input(cmd, i);
-        else if (!ft_strcmp(cmd->args[i], ">>")
-            || !ft_strcmp(cmd->args[i], ">"))
-            redirect_output(cmd, i);
-        i++;
-    }
+	i = 0;
+	while (cmd->args[i])
+	{
+		if (!ft_strcmp(cmd->args[i], "<<"))
+			heredoc(cmd, i);
+		else if (!ft_strcmp(cmd->args[i], "<"))
+			redirect_input(cmd, i);
+		else if (!ft_strcmp(cmd->args[i], ">>")
+			|| !ft_strcmp(cmd->args[i], ">"))
+			redirect_output(cmd, i);
+		i++;
+	}
 }

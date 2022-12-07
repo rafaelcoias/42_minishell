@@ -21,17 +21,17 @@ t_data	*data(void)
 
 // Saves all command paths
 
-static void	get_env_path(void)
+void	get_env_path(void)
 {
 	char	*path;
 
 	path = getenv("PATH");
-	data()->env_path = ft_split(&path[5], ':');
+	(data()->env_path) = ft_split(&path[5], ':');
 }
 
 // Allocar envp
 
-static void init_all(char **envp)
+void	init_all(char **envp)
 {
 	data()->envp = envp;
 	data()->exit = 0;

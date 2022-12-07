@@ -41,7 +41,7 @@ int	handle_quotes(char *input, char **token)
 		return (check_quotes(input, token, ' ', 0));
 }
 
-int	parser(char	*input)
+int	./m	parser(char	*input)
 {
 	int	i;
 	int	ti;

@@ -24,9 +24,8 @@ void	cd_command(char **args)
 		data()->pwd->next = malloc(sizeof(t_pwd));
 		data()->pwd = data()->pwd->next;
 		data()->pwd->last = last_pwd;
-		chdir(args[1]);
-			//error_msg(DIR_ERROR);
-		printf("TESTE\n");
+		if (chdir(args[1]))
+			error_msg(DIR_ERROR);
 		data()->pwd->pwd = getenv("PWD");
 		data()->pwd->next = NULL;
 	}

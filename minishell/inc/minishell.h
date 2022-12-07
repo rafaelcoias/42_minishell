@@ -109,7 +109,6 @@ void	echo_command(char **args);
 void	cd_command(char **args);
 void	redirections(t_cmd *cmd);
 
-
 /* SIGNALS */
 
 void	signal_handler(void);

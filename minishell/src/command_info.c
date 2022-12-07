@@ -66,16 +66,39 @@ t_cmd	*new_cmd(void)
 	return (cmd);
 }
 
-int	equas(const char *a, const char *b)
+int	new_pipe(int *i, int j, t_cmd **end)
 {
-	if (a == NULL || b == NULL)
-		return (0);
-	while (*a && b && *a == *b)
+	if (ft_equals(data()->token[j], "|"))
 	{
-		a++;
-		b++;
+		*i = 0;
+		data()->npipes++;
+		if (!data()->cmd)
+			return (1);
+		(*end)->next = new_cmd();
+		*end = (*end)->next;
+		return (1);
 	}
-	return (*a == *b);
+	return (0);
+}
+
+void	save_exec_args(void)
+{
+	t_cmd	*cmd;
+	int		i;
+	int		j;
+
+	cmd = data()->cmd;
+	i = 0;
+	j = 0;
+	while (cmd)
+	{
+		while (cmd->args[i] && !ft_equals(data()->token[i], "<")
+			&& !ft_equals(data()->token[i], "<<")
+			&& !ft_equals(data()->token[i], ">")
+			&& !ft_equals(data()->token[i], ">>"))
+			cmd->exec_args[j++] = cmd->args[i++];
+		cmd = cmd->next;
+	}
 }
 
 int	create_commands(void)
@@ -89,18 +112,10 @@ int	create_commands(void)
 	data()->cmd = NULL;
 	while (data()->token[++j])
 	{
-		if (equas(data()->token[j], "|"))
-		{
-			i = 0;
-			data()->npipes++;
-			if (!data()->cmd)
-				continue ;
-			end->next = new_cmd();
-			end = end->next;
+		if (new_pipe(&i, j, &end))
 			continue ;
-		}
 		if (!data()->cmd)
-		{	
+		{
 			data()->cmd = new_cmd();
 			end = data()->cmd;
 		}
@@ -108,5 +123,6 @@ int	create_commands(void)
 			end->path = get_cmd_path(data()->token[j]);
 		end->args[i++] = data()->token[j];
 	}
+	save_exec_args();
 	return (0);
 }

@@ -71,6 +71,7 @@ SRC = 	$(LIBFT_PATH)ft_isalpha.c	\
 		$(LIBFT_PATH)ft_lstmap.c		\
 		$(LIBFT_PATH)ft_putlst_fd.c		\
 		$(LIBFT_PATH)ft_free_mtx.c		\
+		$(LIBFT_PATH)ft_equals.c		\
 		$(GNL_PATH)/get_next_line.c			\
 		$(GNL_PATH)/get_next_line_utils.c	\
 		$(PRINT_F_PATH)/ft_printf.c			\

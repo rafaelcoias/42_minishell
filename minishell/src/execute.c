@@ -12,7 +12,7 @@
 
 #include "../inc/minishell.h"
 
-static void	close_fds(int in, int out)
+void	close_fds(int in, int out)
 {
 	if (in != 0)
 		close(in);
@@ -20,7 +20,7 @@ static void	close_fds(int in, int out)
 		close(out);
 }
 
-static void	wait_childs(void)
+void	wait_childs(void)
 {
 	t_cmd	*tmp;
 
@@ -32,7 +32,7 @@ static void	wait_childs(void)
 	}
 }
 
-static void	exec(t_cmd *cmd, int in, int out)
+void	exec(t_cmd *cmd, int in, int out)
 {
 	cmd->pid = fork();
 	if (!cmd->pid)
