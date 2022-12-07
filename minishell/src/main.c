@@ -12,8 +12,6 @@
 
 #include "../inc/minishell.h"
 
-// Allocar envp
-// Ctrl D
 // $USER = t
 // Converter Variaveis de Ambiente
 

@@ -31,6 +31,7 @@ void	free_cmds(void)
 	{
 		temp = aux->next;
 		free(aux->path);
+		//ft_free_mtx(aux->args);
 		free(aux);
 		aux = temp;
 	}
