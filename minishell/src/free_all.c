@@ -46,5 +46,6 @@ void	free_all(char *input)
 		free_cmds();
 	if (data()->token[0])
 		free_tokens();
+	unlink(".here_doc");
 	free(input);
 }

@@ -88,14 +88,14 @@ void	save_exec_args(void)
 	int		j;
 
 	cmd = data()->cmd;
-	i = 0;
-	j = 0;
 	while (cmd)
 	{
-		while (cmd->args[i] && !ft_equals(data()->token[i], "<")
-			&& !ft_equals(data()->token[i], "<<")
-			&& !ft_equals(data()->token[i], ">")
-			&& !ft_equals(data()->token[i], ">>"))
+		i = 0;
+		j = 0;
+		while (cmd->args[i] && !ft_equals(cmd->args[i], "<")
+			&& !ft_equals(cmd->args[i], "<<")
+			&& !ft_equals(cmd->args[i], ">")
+			&& !ft_equals(cmd->args[i], ">>"))
 			cmd->exec_args[j++] = cmd->args[i++];
 		cmd = cmd->next;
 	}

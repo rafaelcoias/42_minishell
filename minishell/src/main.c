@@ -12,6 +12,12 @@
 
 #include "../inc/minishell.h"
 
+// Allocar envp
+// Ctrl D
+// $USER = t
+// Converter Variaveis de Ambiente
+// Fazer cd command
+
 t_data	*data(void)
 {
 	static t_data	data;
@@ -28,8 +34,6 @@ void	get_env_path(void)
 	path = getenv("PATH");
 	(data()->env_path) = ft_split(&path[5], ':');
 }
-
-// Allocar envp
 
 void	init_all(char **envp)
 {

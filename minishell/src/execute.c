@@ -34,6 +34,8 @@ void	wait_childs(void)
 
 void	exec(t_cmd *cmd, int in, int out)
 {
+	if (!ft_strcmp(cmd->args[0], CD_CMD))
+		return (cd_command(cmd->args));
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
@@ -45,7 +47,7 @@ void	exec(t_cmd *cmd, int in, int out)
 		close_fds(in, out);
 		redirections(cmd);
 		check_builtins(cmd);
-		if (execve(cmd->path, cmd->args, data()->envp) == -1)
+		if (execve(cmd->path, cmd->exec_args, data()->envp) == -1)
 			error_msg(EXEC_ERROR);
 		exit(0);
 	}
