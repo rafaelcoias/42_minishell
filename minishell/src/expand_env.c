@@ -12,25 +12,21 @@
 
 #include "../inc/minishell.h"
 
-	// while (str[++i] && (str[i] >= 'a' && str[i] <= 'z')
-	// 	|| (str[i] >= 'A' && str[i] <= 'Z')
-	// 	|| (str[i] >= '0' && str[i] <= '9'))
-	// 	env[i] = str[i];
-
 char	*get_env_var(char *str)
 {
 	char	**env;
 	int		i;
 
 	i = -1;
-	while (data()->env_path[++i])
+	while (data()->envp[++i])
 	{
-		env = ft_split(data()->env_path[i], '=');
+		env = ft_split(data()->envp[i], '=');
 		if (!ft_equals(env[0], str))
 		{
 			ft_free_mtx(env);
 			continue ;
 		}
+		ft_free_mtx(env);
 		return (getenv(str));
 	}
 	return (NULL);
@@ -45,39 +41,42 @@ int	check_env(char *str)
 	return (1);
 }
 
+char	*do_trim(char *str, char *result)
+{
+	char	*trim;
+
+	if (str[0] == '\"')
+		trim = ft_strtrim(result, "\"");
+	else
+		trim = ft_strdup(result);
+	return (trim);
+}
+
 char	*expand_env(char *str)
 {
 	char	result[BUFFER];
-	char	*trim;
 	char	*env_var;
 	int		i;
 	int		j;
 
 	i = 0;
-	//printf("AQUI : %s\n", result);
 	if (str[i] == '\'')
-		return (str);
+		return (ft_strtrim(str, "\'"));
 	while (str[i])
 	{
 		if (str[i] == '$' && check_env(&str[i + 1]))
 		{
 			env_var = get_env_var(&str[i + 1]);
 			j = -1;
-			while (env_var[++j])
+			while (env_var && env_var[++j])
 				result[i++] = env_var[j];
+			if (!env_var)
+				break ;
 		}
 		else
 			result[i] = str[i];
-		//printf("result[%i] : %s\n", i, result);
 		i++;
 	}
 	result[i] = '\0';
-	trim = result;
-	if (str[0] == '\'')
-		trim = ft_strtrim(result, "\'");
-	else if (str[0] == '\"')
-		trim = ft_strtrim(result, "\"");
-	else
-		trim = ft_strdup(result);
-	return (trim);
+	return (do_trim(str, result));
 }

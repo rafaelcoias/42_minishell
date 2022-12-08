@@ -20,21 +20,25 @@
  *
  *	*/
 
+void	print_args(char **args, int i)
+{
+	while (args[i] && !ft_equals(args[i], ">")
+		&& !ft_equals(args[i], ">>")
+		&& !ft_equals(args[i], "<")
+		&& !ft_equals(args[i], "<<"))
+		ft_putstr_fd(args[i++], 1);
+}
+
 void	echo_command(char **args)
 {
 	int	i;
 
 	i = 1;
 	if (args[i] && !ft_strcmp(args[i], "-n"))
-	{
-		i++;
-		while (args[i])
-			ft_printf("%s ", args[i++]);
-	}
+		print_args(args, ++i);
 	else
 	{
-		while (args[i])
-			ft_printf("%s ", args[i++]);
+		print_args(args, i);
 		ft_putchar_fd('\n', 1);
 	}
 }

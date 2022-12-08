@@ -18,5 +18,5 @@ void	cd_command(char **args)
 		chdir(data()->home_path);
 	else
 		if (chdir(args[1]))
-			error_msg(DIR_ERROR);
+			return ((void)error_msg(DIR_ERROR));
 }

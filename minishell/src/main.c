@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+// A fazer
 
-// $USER = t
-// Converter Variaveis de Ambiente
+// Testar melhor $TESTE = t
+// Alterar $PWD ao mudar de diretoria
 
 t_data	*data(void)
 {

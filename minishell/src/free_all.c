@@ -25,13 +25,16 @@ void	free_cmds(void)
 {
 	t_cmd	*aux;
 	t_cmd	*temp;
+	int		i;
 
 	aux = data()->cmd;
 	while (aux)
 	{
 		temp = aux->next;
 		free(aux->path);
-		//ft_free_mtx(aux->args);
+		i = 0;
+		while (aux->args[i])
+			free(aux->args[i++]);
 		free(aux);
 		aux = temp;
 	}
