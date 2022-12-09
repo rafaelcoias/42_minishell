@@ -26,7 +26,12 @@ void	print_args(char **args, int i)
 		&& !ft_equals(args[i], ">>")
 		&& !ft_equals(args[i], "<")
 		&& !ft_equals(args[i], "<<"))
-		ft_putstr_fd(args[i++], 1);
+	{
+		if (args[i + 1])
+			ft_printf("%s ", args[i++]);
+		else
+			ft_printf("%s", args[i++]);
+	}
 }
 
 void	echo_command(char **args)

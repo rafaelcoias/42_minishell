@@ -41,42 +41,64 @@ int	check_env(char *str)
 	return (1);
 }
 
-char	*do_trim(char *str, char *result)
+char	*do_trim(char c, char *result)
 {
 	char	*trim;
 
-	if (str[0] == '\"')
+	if (c == '\"')
 		trim = ft_strtrim(result, "\"");
 	else
 		trim = ft_strdup(result);
 	return (trim);
 }
 
+int	get_var_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '$')
+		i++;
+	return (i);
+}
+
+char	*do_expand(char *result, int k, char *str)
+{
+	char	**all_vars;
+	char	*env_var;
+	int		j;
+	int		i;
+
+	i = -1;
+	all_vars = ft_split(str, '$');
+	while (all_vars[++i])
+	{
+		j = -1;
+		env_var = get_env_var(all_vars[i]);
+		while (env_var && env_var[++j])
+			result[k++] = env_var[j];
+	}
+	result[k] = '\0';
+	ft_free_mtx(all_vars);
+	return (do_trim(str[0], result));
+}
+
 char	*expand_env(char *str)
 {
 	char	result[BUFFER];
-	char	*env_var;
 	int		i;
-	int		j;
+	int		k;
 
 	i = 0;
+	k = 0;
 	if (str[i] == '\'')
 		return (ft_strtrim(str, "\'"));
 	while (str[i])
 	{
 		if (str[i] == '$' && check_env(&str[i + 1]))
-		{
-			env_var = get_env_var(&str[i + 1]);
-			j = -1;
-			while (env_var && env_var[++j])
-				result[i++] = env_var[j];
-			if (!env_var)
-				break ;
-		}
-		else
-			result[i] = str[i];
-		i++;
-	}
-	result[i] = '\0';
-	return (do_trim(str, result));
+			return (do_expand(result, k, &str[i]));
+		result[k++] = str[i++];
+	} 
+	result[k] = '\0';
+	return (do_trim(str[0], result));
 }

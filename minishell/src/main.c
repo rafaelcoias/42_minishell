@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 // A fazer
 
-// Testar melhor $TESTE = t
+// Fazer com que $TESTE = t => ca$TESTE funcionar como cat
 // Alterar $PWD ao mudar de diretoria
 
 t_data	*data(void)
@@ -23,23 +24,16 @@ t_data	*data(void)
 	return (&data);
 }
 
-// Saves all command paths
-
-void	get_env_path(void)
+void	init_all(char **envp)
 {
 	char	*path;
 
 	path = getenv("PATH");
 	(data()->env_path) = ft_split(&path[5], ':');
-}
-
-void	init_all(char **envp)
-{
 	data()->envp = envp;
 	data()->exit = 0;
 	data()->npipes = 0;
 	data()->home_path = getenv("HOME");
-	get_env_path();
 }
 
 /*	When minishell starts it will always ask for
@@ -76,5 +70,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		free_all(input);
 	}
+	ft_free_mtx(data()->env_path);
 	return (0);
 }
