@@ -69,7 +69,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char	*home_path;
-	char	**envp;
+	char	**env;
 	char	**env_path;
 	int		npipes;
 	int		exit;
@@ -100,6 +100,9 @@ int		execute(void);
 void	pwd_command(void);
 void	echo_command(char **args);
 void	cd_command(char **args);
+void	env_command(char **args);
+char	**cpy_env(char **env);
+void    export_command(char **args);
 void	redirections(t_cmd *cmd);
 
 /* SIGNALS */

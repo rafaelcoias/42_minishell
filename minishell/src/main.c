@@ -16,6 +16,9 @@
 
 // Fazer com que $TESTE = t => ca$TESTE funcionar como cat
 // Alterar $PWD ao mudar de diretoria
+// Fazer " " e ' ' funcionar a 100%
+// echo $PATH. devia funcionar
+// Confirmar export simple
 
 t_data	*data(void)
 {
@@ -30,10 +33,10 @@ void	init_all(char **envp)
 
 	path = getenv("PATH");
 	(data()->env_path) = ft_split(&path[5], ':');
-	data()->envp = envp;
 	data()->exit = 0;
 	data()->npipes = 0;
 	data()->home_path = getenv("HOME");
+	data()->env = cpy_env(envp);
 }
 
 /*	When minishell starts it will always ask for
@@ -71,5 +74,6 @@ int	main(int argc, char **argv, char **envp)
 		free_all(input);
 	}
 	ft_free_mtx(data()->env_path);
+	ft_free_mtx(data()->env);
 	return (0);
 }

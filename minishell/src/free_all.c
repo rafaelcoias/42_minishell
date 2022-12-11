@@ -41,7 +41,8 @@ void	free_cmds(void)
 }
 
 /*	Free everything in data list
-	And frees input
+	Frees input
+	Removes .here_doc file if exists
  */
 
 void	free_all(char *input)

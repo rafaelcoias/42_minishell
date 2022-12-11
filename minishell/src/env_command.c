@@ -12,30 +12,42 @@
 
 #include "../inc/minishell.h"
 
-// void	set_pwd(char	*pwd)
-// {
-// 	int	i;
+int get_env_len(char **env)
+{
+    int i;
 
-// 	i = 0;
-// 	data()->env_path = getent();
-// 	while (data()->env_path)
-// 	{
-// 		while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
-// 			i++;
-// 		data()->env_path[i] = pwd;
-// 	}
-// }
+    i = 0;
+    while (env[i])
+        i++;
+    return (i);
+}    
 
-// void	env_command(void)
-// {
-// 	int	i;
+char	**cpy_env(char **env)
+{
+	char	**new_env;
+    int		i;
 
-// 	i = 0;
-// 	while (data()->envp)
-// 	{
-// 		while (data()->env_path[i][0] != 'O' && data()->env_path[i][1] != 'L')
-// 			i++;
-// 		data()->env_path[i] = data()->oldpwd;
-// 		set_pwd(getenv("PWD"));
-// 	}
-// }
+    i = -1;
+    new_env = malloc(sizeof(char *) * get_env_len(env) + 1);
+    if (!new_env)
+	{
+		error_msg(MLC_ERROR);
+        return (NULL);
+	}
+    while (env[++i])
+	{
+        new_env[i] = ft_strdup(env[i]);
+	}
+	new_env[i] = NULL;
+	return (new_env);
+}
+
+void	env_command(char **args)
+{
+    int    i;
+    if (args[1])
+        return ;
+    i = -1;
+    while (data()->env[++i])
+        ft_printf("%s\n", data()->env[i]);
+}

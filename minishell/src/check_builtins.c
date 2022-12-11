@@ -26,15 +26,13 @@ void	check_builtins(t_cmd *cmd)
 		pwd_command();
 	else if (!ft_strcmp(cmd->args[0], ECHO_CMD))
 		echo_command(cmd->args);
+	else if (!ft_strcmp(cmd->args[0], ENV_CMD))
+		env_command(cmd->args);
 	else
 		return ;
 	exit(0);
 }
 
 /*
-	else if (!ft_strcmp(cmd->args[0], EXPORT_CMD))
-		export_command();
-	else if (!ft_strcmp(cmd->args[0], ENV_CMD))
-		env_command();
 	else if (!ft_strcmp(cmd->args[0], UNSET_CMD))
 		unset_command();*/
