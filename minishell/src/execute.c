@@ -34,10 +34,10 @@ void	wait_childs(void)
 
 void	exec(t_cmd *cmd, int in, int out)
 {
-	if (!ft_strcmp(cmd->args[0], CD_CMD))
-		return (cd_command(cmd->args));
-	else if (!ft_strcmp(cmd->args[0], EXPORT_CMD))
-		return (export_command(cmd->args));
+	if (check_builtins(cmd, 0))
+		return ;
+	if (!cmd->path)
+		return ((void)error_msg(EXEC_ERROR));
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
@@ -48,7 +48,7 @@ void	exec(t_cmd *cmd, int in, int out)
 			dup2(in, STDIN_FILENO);
 		close_fds(in, out);
 		redirections(cmd);
-		check_builtins(cmd);
+		check_builtins(cmd, 1);
 		if (execve(cmd->path, cmd->exec_args, data()->env) == -1)
 			error_msg(EXEC_ERROR);
 		exit(0);

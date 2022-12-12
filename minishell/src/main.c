@@ -14,11 +14,9 @@
 
 // A fazer
 
-// Fazer com que $TESTE = t => ca$TESTE funcionar como cat
-// Alterar $PWD ao mudar de diretoria
-// Fazer " " e ' ' funcionar a 100%
-// echo $PATH. devia funcionar
-// Confirmar export simple
+// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat, mas echo funciona
+// Por " " e ' ' a funcionar a 100%
+// Confirmar export simple tem de estar alfabeticamente ordenado
 
 t_data	*data(void)
 {
@@ -37,6 +35,27 @@ void	init_all(char **envp)
 	data()->npipes = 0;
 	data()->home_path = getenv("HOME");
 	data()->env = cpy_env(envp);
+}
+
+char	*get_prompt(void)
+{
+	char	path[BUFFER];
+	char	*prompt;
+	char	**split_pwd;
+	char	*temp;
+
+	getcwd(path, BUFFER);
+	split_pwd = ft_split(path, '/');
+	temp = split_pwd[ft_mtxlen(split_pwd) - 1];
+	temp = ft_strjoin(CYAN, temp);
+	prompt = ft_strjoin(temp, RED);
+	free(temp);
+	temp = ft_strjoin(prompt, " ~ ");
+	free(prompt);
+	prompt = ft_strjoin(temp, RESET);
+	free(temp);
+	ft_free_mtx(split_pwd);
+	return (prompt);
 }
 
 /*	When minishell starts it will always ask for
@@ -62,8 +81,9 @@ int	main(int argc, char **argv, char **envp)
 	init_all(envp);
 	while (!data()->exit)
 	{
+		data()->prompt = get_prompt();
 		data()->npipes = 0;
-		input = readline(PROMPT);
+		input = readline(data()->prompt);
 		if (input && !ft_strncmp(input, EXIT_CMD, 4))
 			exit(0);
 		add_history(input);

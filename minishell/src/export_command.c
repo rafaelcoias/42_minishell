@@ -46,7 +46,6 @@ int	export_exists(char *str, int last)
 		{
 			ft_free_mtx(split_env);
 			ft_free_mtx(split_str);
-			free(data()->env[j]);
 			return (j);
 		}
 		ft_free_mtx(split_env);
@@ -55,28 +54,43 @@ int	export_exists(char *str, int last)
 	return (last);
 }
 
-void    export_command(char **args)
+void	do_export(char **args, int last, char **temp_env)
 {
-	int     last;
-	int		j;
-	int		k;
+	int	k;
+	int	j;
 
-	last = 0;
-	j = 0;
-	if (!args[1])
-		export_command_simple();
-	while (data()->env[last])
-		last++;
+	j = -1;
 	while (args[++j])
 	{
 		if (ft_strchr(args[j], '='))
 		{
 			k = export_exists(args[j], last);
-			ft_free_mtx(data()->env);
-			data()->env[k] = ft_strdup(args[j]);
 			if (k == last)
+			{
+				ft_free_mtx(data()->env);
+				data()->env = cpy_env_new(temp_env, args[j]);
 				last++;
+			}
+			else
+			{
+				free(data()->env[k]);
+				data()->env[k] = ft_strdup(args[j]);
+			}
 		}
 	}
-	data()->env[last] = NULL;
+}
+
+void    export_command(char **args)
+{
+	char	**temp_env;
+	int     last;
+
+	last = 0;
+	if (!args[1])
+		export_command_simple();
+	while (data()->env[last])
+		last++;
+	temp_env = cpy_env(data()->env);
+	do_export(args, last, temp_env);
+	ft_free_mtx(temp_env);
 }

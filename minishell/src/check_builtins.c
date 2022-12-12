@@ -20,19 +20,23 @@
  *	written.
  * */
 
-void	check_builtins(t_cmd *cmd)
+int	check_builtins(t_cmd *cmd, int forked)
 {
-	if (!ft_strcmp(cmd->args[0], PWD_CMD))
+	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
 		pwd_command();
-	else if (!ft_strcmp(cmd->args[0], ECHO_CMD))
-		echo_command(cmd->args);
-	else if (!ft_strcmp(cmd->args[0], ENV_CMD))
-		env_command(cmd->args);
+	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
+		echo_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
+		cd_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
+		export_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+		env_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
+		unset_command(cmd->exec_args);
 	else
-		return ;
-	exit(0);
+		return (0);
+	if (forked)
+		exit(0);
+	return (1);
 }
-
-/*
-	else if (!ft_strcmp(cmd->args[0], UNSET_CMD))
-		unset_command();*/

@@ -108,6 +108,7 @@ int			ft_atoi(const char *str);
 int			ft_lstsize(t_list *lst);
 int			ft_lstsize(t_list *lst);
 int			ft_equals(const char *a, const char *b);
+int			ft_mtxlen(char **mtx);
 
 long long	ft_atol(const char *str);
 

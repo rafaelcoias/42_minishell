@@ -12,15 +12,24 @@
 
 #include "../inc/minishell.h"
 
-int get_env_len(char **env)
+char	**cpy_env_new(char **env, char *new)
 {
-    int i;
+	char	**new_env;
+    int		i;
 
-    i = 0;
-    while (env[i])
-        i++;
-    return (i);
-}    
+    i = -1;
+    new_env = malloc(sizeof(char *) * ft_mtxlen(env) + 2);
+    if (!new_env)
+	{
+		error_msg(MLC_ERROR);
+        return (NULL);
+	}
+    while (env[++i])
+        new_env[i] = ft_strdup(env[i]);
+    new_env[i] = ft_strdup(new);
+    new_env[++i] = NULL;
+	return (new_env);
+}
 
 char	**cpy_env(char **env)
 {
@@ -28,17 +37,15 @@ char	**cpy_env(char **env)
     int		i;
 
     i = -1;
-    new_env = malloc(sizeof(char *) * get_env_len(env) + 1);
+    new_env = malloc(sizeof(char *) * ft_mtxlen(env) + 1);
     if (!new_env)
 	{
 		error_msg(MLC_ERROR);
         return (NULL);
 	}
     while (env[++i])
-	{
         new_env[i] = ft_strdup(env[i]);
-	}
-	new_env[i] = NULL;
+    new_env[i] = NULL;
 	return (new_env);
 }
 

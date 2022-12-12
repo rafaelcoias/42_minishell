@@ -53,4 +53,5 @@ void	free_all(char *input)
 		free_tokens();
 	unlink(".here_doc");
 	free(input);
+	free(data()->prompt);
 }

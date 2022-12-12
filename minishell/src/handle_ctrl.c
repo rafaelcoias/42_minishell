@@ -15,7 +15,7 @@
 void	sigint_handler(int x)
 {
 	(void)x;
-	ft_printf("\n%s", PROMPT);
+	ft_printf("\n%s", data()->prompt);
 }
 
 void	sigtstp_handler(int x)

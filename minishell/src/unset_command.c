@@ -12,16 +12,18 @@
 
 #include "../inc/minishell.h"
 
-void unset_command(char *s)
+void unset_command(char **args)
 {
     int i;
     int j;
     int len;
     int x;
+    char    *s;
 
     i = 0;
     j = 0;
     x = 0;
+    s = args[0];
     len = ft_strlen(s);
     while (data()->env[i])
     {

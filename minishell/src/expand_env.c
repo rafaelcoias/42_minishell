@@ -21,22 +21,29 @@ int	check_env(char *str, int i)
 	return (1);
 }
 
-char	*get_env_var(char *str)
+char	*get_env_var(int *z, char *str)
 {
 	char	**env;
+	char	temp[BUFFER];
 	int		i;
+	int		j;
 	
 	i = -1;
-	while (data()->env[++i])
+	j = -1;
+	while (str[++i] && check_env(str, i))
+		temp[i] = str[i];
+	temp[i] = '\0';
+	while (data()->env[++j])
 	{
-		env = ft_split(data()->env[i], '=');
-		if (!ft_equals(env[0], str))
+		env = ft_split(data()->env[j], '=');
+		if (!ft_equals(env[0], temp))
 		{
 			ft_free_mtx(env);
 			continue ;
 		}
 		ft_free_mtx(env);
-		return (getenv(str));
+		*z = ft_strlen(temp);
+		return (getenv(temp));
 	}
 	return (NULL);
 }
@@ -60,15 +67,19 @@ char	*do_expand(char *result, int k, char *str)
 	char	*env_var;
 	int		j;
 	int		i;
+	int		z;
 
 	i = -1;
 	all_vars = ft_split(str, '$');
 	while (all_vars[++i])
 	{
 		j = -1;
-		env_var = get_env_var(all_vars[i]);
+		z = 0;
+		env_var = get_env_var(&z, all_vars[i]);
 		while (env_var && env_var[++j])
 			result[k++] = env_var[j];
+		while (env_var && all_vars[i][z])
+			result[k++] = all_vars[i][z++];
 	}
 	result[k] = '\0';
 	ft_free_mtx(all_vars);

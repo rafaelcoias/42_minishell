@@ -34,7 +34,6 @@
 /*	DEFINES */
 
 # define BUFFER 1024
-# define PROMPT CYAN"minishell"RED" ~ "RESET
 # define PWD_CMD "pwd"
 # define ECHO_CMD "echo"
 # define EXIT_CMD "exit"
@@ -69,6 +68,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char	*home_path;
+	char	*prompt;
 	char	**env;
 	char	**env_path;
 	int		npipes;
@@ -84,7 +84,6 @@ typedef struct s_data
 
 t_data	*data(void);
 int		parser(char *input);
-char	*expand_env(char *str);
 int		error_msg(char *str);
 void	free_all(char *input);
 
@@ -92,7 +91,7 @@ void	free_all(char *input);
 
 int		create_commands(void);
 int		handle_pipe(void);
-void	check_builtins(t_cmd *cmd);
+int		check_builtins(t_cmd *cmd, int forked);
 int		execute(void);
 
 /* COMMANDS */
@@ -100,10 +99,16 @@ int		execute(void);
 void	pwd_command(void);
 void	echo_command(char **args);
 void	cd_command(char **args);
-void	env_command(char **args);
-char	**cpy_env(char **env);
 void    export_command(char **args);
+void	env_command(char **args);
+void	unset_command(char **args);
 void	redirections(t_cmd *cmd);
+
+/* HANDLE ENV */
+
+char	**cpy_env_new(char **env, char *new);
+char	**cpy_env(char **env);
+char	*expand_env(char *str);
 
 /* SIGNALS */
 
