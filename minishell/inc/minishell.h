@@ -99,7 +99,7 @@ int		execute(void);
 void	pwd_command(void);
 void	echo_command(char **args);
 void	cd_command(char **args);
-void    export_command(char **args);
+void	export_command(char **args);
 void	env_command(char **args);
 void	unset_command(char **args);
 void	redirections(t_cmd *cmd);

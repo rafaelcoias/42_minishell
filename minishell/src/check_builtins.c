@@ -22,21 +22,27 @@
 
 int	check_builtins(t_cmd *cmd, int forked)
 {
-	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
-		pwd_command();
-	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
-		echo_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
+	if (forked)
+	{
+		if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
+			pwd_command();
+		else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
+			echo_command(cmd->exec_args);
+		else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
+			export_command(cmd->exec_args);
+		else
+			return (0);
+		exit(0);
+	}
+	if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
 		cd_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
 		export_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
-		env_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
 		unset_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+		env_command(cmd->exec_args);
 	else
 		return (0);
-	if (forked)
-		exit(0);
 	return (1);
 }

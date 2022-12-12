@@ -27,7 +27,7 @@ char	*get_env_var(int *z, char *str)
 	char	temp[BUFFER];
 	int		i;
 	int		j;
-	
+
 	i = -1;
 	j = -1;
 	while (str[++i] && check_env(str, i))
@@ -45,45 +45,40 @@ char	*get_env_var(int *z, char *str)
 		*z = ft_strlen(temp);
 		return (getenv(temp));
 	}
+	*z = ft_strlen(temp);
 	return (NULL);
 }
 
-char	*do_trim(char c, char *result)
-{
-	char	*trim;
-
-	if (c == '\"')
-		trim = ft_strtrim(result, "\"");
-	else if (c == '\'')
-		trim = ft_strtrim(result, "\'");
-	else
-		trim = ft_strdup(result);
-	return (trim);
-}
-
-char	*do_expand(char *result, int k, char *str)
+int	do_expand(char *result, int k, char *str, int *str_i)
 {
 	char	**all_vars;
 	char	*env_var;
 	int		j;
-	int		i;
 	int		z;
 
-	i = -1;
 	all_vars = ft_split(str, '$');
-	while (all_vars[++i])
+	if (all_vars[0])
 	{
 		j = -1;
 		z = 0;
-		env_var = get_env_var(&z, all_vars[i]);
+		env_var = get_env_var(&z, all_vars[0]);
 		while (env_var && env_var[++j])
 			result[k++] = env_var[j];
-		while (env_var && all_vars[i][z])
-			result[k++] = all_vars[i][z++];
+		while (all_vars[0][z] && all_vars[0][z] != '\"')
+			result[k++] = all_vars[0][z++];
+		*str_i = *str_i + z;
 	}
-	result[k] = '\0';
 	ft_free_mtx(all_vars);
-	return (do_trim(str[0], result));
+	return (k);
+}
+
+int	handle_double_quote(char *result, char *str, int *i, int k)
+{
+	if (str[*i] && str[*i] == '$' && check_env(&str[*i + 1], 0))
+		k = do_expand(&result[0], k, &str[*i], i);
+	else
+		result[k++] = str[*i];
+	return (k);
 }
 
 char	*expand_env(char *str)
@@ -94,14 +89,18 @@ char	*expand_env(char *str)
 
 	i = 0;
 	k = 0;
-	if (str[i] == '\'')
-		return (ft_strtrim(str, "\'"));
 	while (str[i])
 	{
-		if (str[i] == '$' && check_env(&str[i + 1], 0))
-			return (do_expand(result, k, &str[i]));
-		result[k++] = str[i++];
-	} 
+		if (str[i] == '\'')
+			while (str[++i] && str[i] != '\'')
+				result[k++] = str[i];
+		else if (str[i] && str[i] == '\"')
+			while (str[++i] && str[i] != '\"')
+				k = handle_double_quote(&result[0], str, &i, k);
+		else
+			k = handle_double_quote(&result[0], str, &i, k);
+		i++;
+	}
 	result[k] = '\0';
-	return (do_trim(str[0], result));
+	return (ft_strdup(result));
 }

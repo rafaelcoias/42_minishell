@@ -14,9 +14,9 @@
 
 // A fazer
 
-// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat, mas echo funciona
-// Por " " e ' ' a funcionar a 100%
-// Confirmar export simple tem de estar alfabeticamente ordenado
+// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
+// Por cd - a 100%
+// Redirecionamento no export e env
 
 t_data	*data(void)
 {

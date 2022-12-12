@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:14:43 by rade-sar          #+#    #+#             */
-/*   Updated: 2021/10/28 21:38:17 by rade-sar         ###   ########.fr       */
+/*   Created: 2022/12/12 13:55:39 by rade-sar          #+#    #+#             */
+/*   Updated: 2022/12/12 13:55:41 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int ft_mtxlen(char **mtx)
+int	ft_mtxlen(char **mtx)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (mtx && mtx[i])
-        i++;
-    return (i);
+	i = 0;
+	while (mtx && mtx[i])
+		i++;
+	return (i);
 }

@@ -12,21 +12,6 @@
 
 #include "../inc/minishell.h"
 
-void    export_command_simple(void)
-{
-	int i;
-
-	i = 0;
-	while (data()->env[i])
-	{
-		while (data()->env[i] && !ft_strchr(data()->env[i], '='))
-			i++;
-		if (ft_strchr(data()->env[i], '='))
-			ft_printf("%s\n", data()->env[i]);
-		i++;
-	}
-}
-
 int	export_exists(char *str, int last)
 {
 	char	**split_env;
@@ -68,7 +53,7 @@ void	do_export(char **args, int last, char **temp_env)
 			if (k == last)
 			{
 				ft_free_mtx(data()->env);
-				data()->env = cpy_env_new(temp_env, args[j]);
+				(data()->env) = cpy_env_new(temp_env, args[j]);
 				last++;
 			}
 			else
@@ -80,14 +65,14 @@ void	do_export(char **args, int last, char **temp_env)
 	}
 }
 
-void    export_command(char **args)
+void	export_command(char **args)
 {
 	char	**temp_env;
-	int     last;
+	int		last;
 
 	last = 0;
 	if (!args[1])
-		export_command_simple();
+		env_command(args);
 	while (data()->env[last])
 		last++;
 	temp_env = cpy_env(data()->env);
