@@ -12,6 +12,43 @@
 
 #include "../inc/minishell.h"
 
+int	is_builtin(t_cmd *cmd)
+{
+	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
+		return (1);
+	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
+		return (1);
+	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
+		return (1);
+	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
+		return (1);
+	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
+		return (1);
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+		return (1);
+	return (0);
+}
+
+int	forked_builtins(t_cmd *cmd)
+{
+	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
+		pwd_command();
+	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
+		echo_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
+		cd_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
+		unset_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
+		export_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+		env_command(cmd->exec_args);
+	else
+		return (0);
+	ft_free_mtx(data()->env);
+	exit(0);
+}
+
 /*	This function sees what command or
  *	commands did the user write.
  *
@@ -20,27 +57,17 @@
  *	written.
  * */
 
-int	check_builtins(t_cmd *cmd, int forked)
+int	check_builtins(t_cmd *cmd)
 {
-	if (forked)
-	{
-		if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
-			pwd_command();
-		else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
-			echo_command(cmd->exec_args);
-		else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
-			export_command(cmd->exec_args);
-		else
-			return (0);
-		exit(0);
-	}
+	if (data()->npipes)
+		return (0);
 	if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
 		cd_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
-		export_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
 		unset_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD) && !cmd->redir)
+		export_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD) && !cmd->redir)
 		env_command(cmd->exec_args);
 	else
 		return (0);

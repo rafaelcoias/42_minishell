@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-/*	INCLUDES	*/
+/* INCLUDES	*/
 
 # include "./libft/libft.h"
 # include <readline/readline.h>
@@ -31,7 +31,7 @@
 # include <curses.h>
 # include <term.h>
 
-/*	DEFINES */
+/* DEFINES */
 
 # define BUFFER 1024
 # define PWD_CMD "pwd"
@@ -42,16 +42,26 @@
 # define ENV_CMD "env"
 # define UNSET_CMD "unset"
 
-/* ERROR	*/
+/* EXIT VALUES */
+
+# define NONE 0
+# define FILE_DIR_VALUE 1
+# define OUT_RANGE_VALUE 255
+# define CTRL_C_VALUE 130
+# define CMD_NOT_FOUND_VALUE 127
+
+/* ERROR */
 
 # define PIPE_ERROR RED"Error : "YELLOW"Creating pipe"RESET
 # define FORK_ERROR RED"Error : "YELLOW"Creating process"RESET
 # define MLC_ERROR RED"Error : "YELLOW"Allocation failed"RESET
 # define EXEC_ERROR RED"Error : "YELLOW"Invalid command"RESET
 # define DIR_ERROR RED"Error : "YELLOW"Directory does not exists"RESET
+# define FILE_IS_DIR_ERROR RED"Error : "YELLOW"File cannot be a directory"RESET
+# define FILE_ERROR RED"Error : "YELLOW"File does not exists"RESET
 # define OPEN_ERROR RED"Error : "YELLOW"Can not open file or directory"RESET
 
-/*	LISTS	*/
+/* LISTS */
 
 typedef struct s_cmd
 {
@@ -60,6 +70,7 @@ typedef struct s_cmd
 	char			*exec_args[BUFFER];
 	pid_t			pid;
 	int				pipe[2];
+	int				redir;
 	int				fd_in;
 	int				fd_out;
 	struct s_cmd	*next;
@@ -73,12 +84,13 @@ typedef struct s_data
 	char	**env_path;
 	int		npipes;
 	int		exit;
+	int		exit_value;
 	int		fd_heredoc;
 	char	*token[BUFFER];
 	t_cmd	*cmd;
 }	t_data;
 
-/*	FUNCTIONS */
+/* FUNCTIONS */
 
 /* MAIN */
 
@@ -91,8 +103,13 @@ void	free_all(char *input);
 
 int		create_commands(void);
 int		handle_pipe(void);
-int		check_builtins(t_cmd *cmd, int forked);
 int		execute(void);
+
+/* BUILTINS */
+
+int		is_builtin(t_cmd *cmd);
+int		check_builtins(t_cmd *cmd);
+int		forked_builtins(t_cmd *cmd);
 
 /* COMMANDS */
 
@@ -102,12 +119,12 @@ void	cd_command(char **args);
 void	export_command(char **args);
 void	env_command(char **args);
 void	unset_command(char **args);
-void	redirections(t_cmd *cmd);
+int		redirections(t_cmd *cmd);
 
 /* HANDLE ENV */
 
-char	**cpy_env_new(char **env, char *new);
-char	**cpy_env(char **env);
+char	*my_getenv(char *str);
+char	**cpy_env(char **env, char *new);
 char	*expand_env(char *str);
 
 /* SIGNALS */

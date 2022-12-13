@@ -43,7 +43,7 @@ char	*get_env_var(int *z, char *str)
 		}
 		ft_free_mtx(env);
 		*z = ft_strlen(temp);
-		return (getenv(temp));
+		return (my_getenv(temp));
 	}
 	*z = ft_strlen(temp);
 	return (NULL);

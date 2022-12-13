@@ -20,6 +20,15 @@ void	close_fds(int in, int out)
 		close(out);
 }
 
+void	dup2_fds(int in, int out)
+{
+	if (in != STDIN_FILENO)
+		dup2(in, STDIN_FILENO);
+	if (out != STDOUT_FILENO)
+		dup2(out, STDOUT_FILENO);
+}
+
+
 void	wait_childs(void)
 {
 	t_cmd	*tmp;
@@ -34,21 +43,17 @@ void	wait_childs(void)
 
 void	exec(t_cmd *cmd, int in, int out)
 {
-	if (check_builtins(cmd, 0))
+	if (check_builtins(cmd))
 		return ;
-	if (!cmd->path)
-		return ((void)error_msg(EXEC_ERROR));
 	cmd->pid = fork();
 	if (!cmd->pid)
 	{
 		close(cmd->pipe[0]);
-		if (out != STDOUT_FILENO)
-			dup2(out, STDOUT_FILENO);
-		if (in != STDIN_FILENO)
-			dup2(in, STDIN_FILENO);
+		dup2_fds(in, out);
 		close_fds(in, out);
-		redirections(cmd);
-		check_builtins(cmd, 1);
+		if (redirections(cmd))
+			return ;
+		forked_builtins(cmd);
 		if (execve(cmd->path, cmd->exec_args, data()->env) == -1)
 			error_msg(EXEC_ERROR);
 		exit(0);

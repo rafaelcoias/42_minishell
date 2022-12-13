@@ -12,7 +12,10 @@
 
 #include "../inc/minishell.h"
 
-// void	unset_command(char **args)
+void	unset_command(char **args)
+{
+    (void)args;
+}
 // {
 // 	int		i;
 // 	int		j;

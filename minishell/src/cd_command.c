@@ -48,15 +48,13 @@ void	cd_command(char **args)
 {
 	char	oldpwd[BUFFER];
 
-	if (data()->npipes)
-		return ;
 	getcwd(oldpwd, BUFFER);
 	if (!args[1])
 		chdir(data()->home_path);
 	else
 	{
 		if (ft_equals(args[1], "-"))
-			chdir(getenv("OLDPWD"));
+			chdir(my_getenv("OLDPWD"));
 		else
 			if (chdir(args[1]))
 				return ((void)error_msg(DIR_ERROR));

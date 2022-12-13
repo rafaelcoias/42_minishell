@@ -15,26 +15,15 @@
 // A fazer
 
 // Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
-// Por cd - a 100%
-// Redirecionamento no export e env
+// Export a tem de fazer a=''
+// Exit tem de dar um valor no $?
+// ctrl-C faz prompt 2x do Prompt
 
 t_data	*data(void)
 {
 	static t_data	data;
 
 	return (&data);
-}
-
-void	init_all(char **envp)
-{
-	char	*path;
-
-	path = getenv("PATH");
-	(data()->env_path) = ft_split(&path[5], ':');
-	data()->exit = 0;
-	data()->npipes = 0;
-	data()->home_path = getenv("HOME");
-	data()->env = cpy_env(envp);
 }
 
 char	*get_prompt(void)
@@ -58,6 +47,15 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
+void	init_all(void)
+{
+	data()->exit = 0;
+	data()->npipes = 0;
+	data()->exit_value = NONE;
+	data()->prompt = get_prompt();
+	data()->home_path = my_getenv("HOME");
+}
+
 /*	When minishell starts it will always ask for
  * the users input.
  *
@@ -68,8 +66,8 @@ char	*get_prompt(void)
  *	and after executing the command it frees the input
  *	to do all over again.
  *
- *	If user writes the exit command, the program frees
- *	everything and ends.
+ *	If user writes the exit command or CTRL-D,
+ *	the program frees everything and ends.
  * */
 int	main(int argc, char **argv, char **envp)
 {
@@ -78,11 +76,10 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	signal_handler();
-	init_all(envp);
+	data()->env = cpy_env(envp, NULL);
 	while (!data()->exit)
 	{
-		data()->prompt = get_prompt();
-		data()->npipes = 0;
+		init_all();
 		input = readline(data()->prompt);
 		if (input && !ft_strncmp(input, EXIT_CMD, 4))
 			exit(0);
@@ -93,7 +90,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		free_all(input);
 	}
-	ft_free_mtx(data()->env_path);
 	ft_free_mtx(data()->env);
 	return (0);
 }

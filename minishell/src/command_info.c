@@ -42,24 +42,29 @@ char	*get_cmd_path(char *cmd)
 	else if (ft_strchr(cmd, '/') && access(cmd, F_OK))
 		return (NULL);
 	i = -1;
+	data()->env_path = ft_split(my_getenv("PATH"), ':');
 	while (data()->env_path[++i])
 	{
 		add_slash = ft_strjoin(data()->env_path[i], "/");
 		path = ft_strjoin(add_slash, cmd);
 		free(add_slash);
 		if (!access(path, F_OK))
+		{
+			ft_free_mtx(data()->env_path);
 			return (path);
+		}
 		free(path);
 	}
+	ft_free_mtx(data()->env_path);
 	return (NULL);
 }
 
-/*	Creates a command based on the tokens */
 t_cmd	*new_cmd(void)
 {
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
+	cmd->redir = 0;
 	cmd->fd_in = 0;
 	cmd->fd_out = 1;
 	cmd->path = NULL;
@@ -97,6 +102,11 @@ void	save_exec_args(void)
 			&& !ft_equals(cmd->args[i], ">")
 			&& !ft_equals(cmd->args[i], ">>"))
 			cmd->exec_args[j++] = cmd->args[i++];
+		if (cmd->args[i] && (ft_equals(cmd->args[i], "<")
+			|| ft_equals(cmd->args[i], "<<")
+			|| ft_equals(cmd->args[i], ">")
+			|| ft_equals(cmd->args[i], ">>")))
+			cmd->redir = 1;
 		cmd = cmd->next;
 	}
 }
