@@ -133,6 +133,7 @@ int	create_commands(void)
 			end->path = get_cmd_path(data()->token[j]);
 		end->args[i++] = expand_env(data()->token[j]);
 	}
+	data()->error = NONE;
 	save_exec_args();
 	return (0);
 }

@@ -12,45 +12,50 @@
 
 #include "../inc/minishell.h"
 
+int check(char *str)
+{
+    int i;
+
+    i = -1;
+    while (str[++i])
+        if (!ft_isalnum(str[i]))
+            return (error_msg(UNSET_ERROR));
+    return (0);
+}
+
+void    do_unset(int i)
+{
+    while (data()->env[i + 1])
+    {
+        free(data()->env[i]);
+        data()->env[i] = ft_strdup(data()->env[i + 1]);
+        i++;
+    }
+    free(data()->env[i]);
+    data()->env[i] = NULL;
+}
+
 void	unset_command(char **args)
 {
-    (void)args;
-}
-// {
-// 	int		i;
-// 	int		j;
-// 	int		len;
-// 	int		x;
-// 	char	*s;
+    char    **temp;
+	int		i;
+	int		j;
 
-// 	i = 0;
-// 	j = 0;
-// 	x = 0;
-// 	s = args[0];
-// 	len = ft_strlen(s);
-// 	while (data()->env[i])
-// 	{
-// 		while (data()->env[i][j] != s[x] && data()->env[i][j])
-// 			i++;
-// 		while (data()->env[i][j] == s[x]
-// 			&& data()->env[i][j] && j < len && s[x])
-// 		{
-// 			j++;
-// 			x++;
-// 			if (j != len - 1)
-// 			{
-// 				x = 0;
-// 				j = 0;
-// 				i++;
-// 			}
-// 			else
-// 				free(data()->env[i]);
-// 		}
-// 		while (data()->env[i + 1])
-// 		{
-// 			data()->env[i] = data()->env[i + 1];
-// 			i++;
-// 		}
-// 		data()->env[i] = NULL;
-// 	}
-// }
+	j = 0;
+    if (!args[1])
+        return ((void)error_msg(FEW_ARGS_ERROR));
+    while (args[++j])
+    {
+        if (check(args[j]))
+            continue ;
+        i = 0;
+        while (data()->env[i])
+        {
+            temp = ft_split(data()->env[i], '=');
+            if (ft_equals(temp[0], args[j]))
+                do_unset(i);
+            ft_free_mtx(temp);
+            i++;
+        }
+    }
+}

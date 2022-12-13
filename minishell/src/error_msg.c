@@ -14,11 +14,10 @@
 
 void	get_exit_value(char *str)
 {
-	if (ft_equals(str, OPEN_ERROR) || ft_equals(str, FILE_ERROR)
-		|| ft_equals(str, FILE_IS_DIR_ERROR) || ft_equals(str, DIR_ERROR))
-		data()->exit_value = FILE_DIR_VALUE;
-	else if (ft_equals(str, EXEC_ERROR))
-		data()->exit_value = CMD_NOT_FOUND_VALUE;
+	if (ft_equals(str, EXEC_ERROR))
+		data()->error = CMD_NOT_FOUND_VALUE;
+	else 
+		data()->error = NORMAL_ERROR_VALUE;
 }
 
 // Displays a programmed error message

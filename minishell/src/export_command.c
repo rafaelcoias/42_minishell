@@ -39,43 +39,64 @@ int	export_exists(char *str, int last)
 	return (last);
 }
 
-void	do_export(char **args, int last, char **temp_env)
+void	do_export2(char *str, int last, char **temp_env)
 {
 	int	k;
-	int	j;
 
-	j = -1;
+	k = export_exists(str, last);
+	if (k == last)
+	{
+		ft_free_mtx(data()->env);
+		(data()->env) = cpy_env(temp_env, str);
+		last++;
+	}
+	else
+	{
+		free(data()->env[k]);
+		data()->env[k] = ft_strdup(str);
+	}
+
+}
+
+void	do_export(char **args, int last)
+{
+	char	**temp_env;
+	char	*temp;
+	int		j;
+
+	j = 0;
 	while (args[++j])
 	{
+		temp_env = cpy_env(data()->env, NULL);
 		if (ft_strchr(args[j], '='))
+			do_export2(args[j], last, temp_env);
+		else
 		{
-			k = export_exists(args[j], last);
-			if (k == last)
-			{
-				ft_free_mtx(data()->env);
-				(data()->env) = cpy_env(temp_env, args[j]);
-				last++;
-			}
-			else
-			{
-				free(data()->env[k]);
-				data()->env[k] = ft_strdup(args[j]);
-			}
+			temp = ft_strjoin(args[j], "=''");
+			do_export2(temp, last, temp_env);
+			free(temp);
 		}
+		ft_free_mtx(temp_env);
 	}
+}
+
+void	export_simple(void)
+{
+	int	i;
+
+	i = -1;
+	while (data()->env[++i])
+		ft_printf("%s\n", data()->env[i]);
 }
 
 void	export_command(char **args)
 {
-	char	**temp_env;
 	int		last;
 
 	last = 0;
 	if (!args[1])
-		env_command(args);
+		export_simple();
 	while (data()->env[last])
 		last++;
-	temp_env = cpy_env(data()->env, NULL);
-	do_export(args, last, temp_env);
-	ft_free_mtx(temp_env);
+	do_export(args, last);
 }

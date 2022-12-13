@@ -32,7 +32,7 @@ int	is_builtin(t_cmd *cmd)
 int	forked_builtins(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
-		pwd_command();
+		pwd_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
 		echo_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))

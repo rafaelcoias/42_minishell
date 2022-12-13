@@ -21,7 +21,7 @@ void	sigint_handler(int x)
 void	sigtstp_handler(int x)
 {
 	(void)x;
-	data()->exit_value = CTRL_C_VALUE;
+	data()->error = CTRL_C_VALUE;
 }
 
 void	signal_handler(void)

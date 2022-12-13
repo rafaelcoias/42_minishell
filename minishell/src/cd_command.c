@@ -46,6 +46,7 @@ void	export_oldpwd(char *oldpwd)
 
 void	cd_command(char **args)
 {
+	char	path[BUFFER];
 	char	oldpwd[BUFFER];
 
 	getcwd(oldpwd, BUFFER);
@@ -54,7 +55,11 @@ void	cd_command(char **args)
 	else
 	{
 		if (ft_equals(args[1], "-"))
+		{
 			chdir(my_getenv("OLDPWD"));
+			getcwd(path, BUFFER);
+			ft_printf("%s\n", path);
+		}
 		else
 			if (chdir(args[1]))
 				return ((void)error_msg(DIR_ERROR));

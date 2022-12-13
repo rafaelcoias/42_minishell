@@ -44,11 +44,11 @@
 
 /* EXIT VALUES */
 
-# define NONE 0
-# define FILE_DIR_VALUE 1
-# define OUT_RANGE_VALUE 255
-# define CTRL_C_VALUE 130
-# define CMD_NOT_FOUND_VALUE 127
+# define NONE "0"
+# define NORMAL_ERROR_VALUE "1"
+# define OUT_RANGE_VALUE "255"
+# define CTRL_C_VALUE "130"
+# define CMD_NOT_FOUND_VALUE "127"
 
 /* ERROR */
 
@@ -60,6 +60,9 @@
 # define FILE_IS_DIR_ERROR RED"Error : "YELLOW"File cannot be a directory"RESET
 # define FILE_ERROR RED"Error : "YELLOW"File does not exists"RESET
 # define OPEN_ERROR RED"Error : "YELLOW"Can not open file or directory"RESET
+# define FEW_ARGS_ERROR RED"Error : "YELLOW"Not enough arguments"RESET
+# define MANY_ERROR RED"Error : "YELLOW"Too many arguments"RESET
+# define UNSET_ERROR RED"Error : "YELLOW"Invalid parameter name"RESET
 
 /* LISTS */
 
@@ -82,9 +85,9 @@ typedef struct s_data
 	char	*prompt;
 	char	**env;
 	char	**env_path;
+	char	*error;
 	int		npipes;
 	int		exit;
-	int		exit_value;
 	int		fd_heredoc;
 	char	*token[BUFFER];
 	t_cmd	*cmd;
@@ -113,7 +116,7 @@ int		forked_builtins(t_cmd *cmd);
 
 /* COMMANDS */
 
-void	pwd_command(void);
+void	pwd_command(char **args);
 void	echo_command(char **args);
 void	cd_command(char **args);
 void	export_command(char **args);

@@ -20,6 +20,8 @@ char	*my_getenv(char *str)
 	int		j;
 
 	j = -1;
+	if (!str[0])
+		return (data()->error);
 	while (data()->env[++j])
 	{
 		split_env = ft_split(data()->env[j], '=');
@@ -60,12 +62,17 @@ char	**cpy_env(char **env, char *new)
 
 void	env_command(char **args)
 {
-	int	i;
-
+	char	**temp;
+	int		i;
 	
 	if (args[1])
 		return ;
 	i = -1;
 	while (data()->env[++i])
-		ft_printf("%s\n", data()->env[i]);
+	{
+		temp = ft_split(data()->env[i], '=');
+		if (temp[1] && !ft_equals(temp[1], "''"))
+			ft_printf("%s\n", data()->env[i]);
+		ft_free_mtx(temp);
+	}
 }

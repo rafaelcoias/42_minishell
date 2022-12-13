@@ -14,10 +14,9 @@
 
 // A fazer
 
-// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
-// Export a tem de fazer a=''
-// Exit tem de dar um valor no $?
 // ctrl-C faz prompt 2x do Prompt
+// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
+// Exit tem de dar um valor no $? ?
 
 t_data	*data(void)
 {
@@ -51,9 +50,14 @@ void	init_all(void)
 {
 	data()->exit = 0;
 	data()->npipes = 0;
-	data()->exit_value = NONE;
 	data()->prompt = get_prompt();
 	data()->home_path = my_getenv("HOME");
+}
+
+void	exit_program(char *input)
+{
+	(void)input;
+	exit(0);
 }
 
 /*	When minishell starts it will always ask for
@@ -77,12 +81,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	signal_handler();
 	data()->env = cpy_env(envp, NULL);
+	data()->error = NONE;
 	while (!data()->exit)
 	{
 		init_all();
 		input = readline(data()->prompt);
 		if (input && !ft_strncmp(input, EXIT_CMD, 4))
-			exit(0);
+			exit_program(input);
 		add_history(input);
 		if (input && !parser(input) && !create_commands())
 			execute();

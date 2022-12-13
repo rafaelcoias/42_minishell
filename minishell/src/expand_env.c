@@ -12,13 +12,25 @@
 
 #include "../inc/minishell.h"
 
-int	check_env(char *str, int i)
+int	check_error_value(char *str, int value)
 {
-	if (str[i] && (str[i] < 'a' || str[i] > 'z')
-		&& (str[i] < 'A' || str[i] > 'Z')
-		&& (str[i] < '0' || str[i] > '9'))
-		return (0);
-	return (1);
+	int	num;
+	int	i;
+
+	i = 0;
+	if (!str[0])
+	{
+		num = ft_atoi(str);
+		if (num == 0)
+			return (1);
+		while (num != 0)
+		{
+			num /= 10;
+			i++;
+		}
+		return (i);
+	}
+	return (value);
 }
 
 char	*get_env_var(int *z, char *str)
@@ -30,7 +42,7 @@ char	*get_env_var(int *z, char *str)
 
 	i = -1;
 	j = -1;
-	while (str[++i] && check_env(str, i))
+	while (str[++i] && ft_isalnum(str[i]))
 		temp[i] = str[i];
 	temp[i] = '\0';
 	while (data()->env[++j])
@@ -42,11 +54,11 @@ char	*get_env_var(int *z, char *str)
 			continue ;
 		}
 		ft_free_mtx(env);
-		*z = ft_strlen(temp);
-		return (my_getenv(temp));
+		break ;
 	}
 	*z = ft_strlen(temp);
-	return (NULL);
+	*z = check_error_value(temp, *z);
+	return (my_getenv(temp));
 }
 
 int	do_expand(char *result, int k, char *str, int *str_i)
@@ -74,7 +86,8 @@ int	do_expand(char *result, int k, char *str, int *str_i)
 
 int	handle_double_quote(char *result, char *str, int *i, int k)
 {
-	if (str[*i] && str[*i] == '$' && check_env(&str[*i + 1], 0))
+	if (str[*i] && str[*i] == '$' && (ft_isalnum(str[*i + 1])
+		|| str[*i + 1] == '?'))
 		k = do_expand(&result[0], k, &str[*i], i);
 	else
 		result[k++] = str[*i];
