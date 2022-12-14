@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 18:10:52 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 17:45:05 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:34:16 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 // ctrl-C faz prompt 2x do Prompt
 // Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
 // Exit tem de dar um valor no $? ?
+// unset path
+// leaks quando se da export de uma variavel e depois se chama 
 
 t_data	*data(void)
 {

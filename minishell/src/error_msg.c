@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 10:21:57 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/11 10:50:28 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:13:09 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_exit_value(char *str)
 {
 	if (ft_equals(str, EXEC_ERROR))
 		data()->error = CMD_NOT_FOUND_VALUE;
-	else 
+	else
 		data()->error = NORMAL_ERROR_VALUE;
 }
 

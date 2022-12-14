@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_command.c                                     :+:      :+:    :+:   */
+/*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:47 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/11 23:17:35 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:02:40 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	do_expand(char *result, int k, char *str, int *str_i)
 int	handle_double_quote(char *result, char *str, int *i, int k)
 {
 	if (str[*i] && str[*i] == '$' && (ft_isalnum(str[*i + 1])
-		|| str[*i + 1] == '?'))
+			|| str[*i + 1] == '?'))
 		k = do_expand(&result[0], k, &str[*i], i);
 	else
 		result[k++] = str[*i];

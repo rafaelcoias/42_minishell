@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:51 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 19:48:35 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:12:43 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	do_export2(char *str, int last, char **temp_env)
 		free(data()->env[k]);
 		data()->env[k] = ft_strdup(str);
 	}
-
 }
 
 void	do_export(char **args, int last)

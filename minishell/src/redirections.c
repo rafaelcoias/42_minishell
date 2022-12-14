@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_command.c                                   :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 22:36:01 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/12 00:46:23 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:03:37 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	redirect_output(t_cmd *cmd, int i)
 		cmd->fd_out = open(cmd->args[i + 1], O_CREAT \
 		| O_WRONLY | O_TRUNC, 0644);
 	if (cmd->fd_out == -1)
-			return (error_msg(OPEN_ERROR));
+		return (error_msg(OPEN_ERROR));
 	dup2(cmd->fd_out, STDOUT_FILENO);
 	return (0);
 }

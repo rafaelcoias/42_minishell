@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_exec.c                                     :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:44 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/12 00:09:30 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:03:57 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	dup2_fds(int in, int out)
 	if (out != STDOUT_FILENO)
 		dup2(out, STDOUT_FILENO);
 }
-
 
 void	wait_childs(void)
 {

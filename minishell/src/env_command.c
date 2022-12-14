@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 19:45:45 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:03:17 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	env_command(char **args)
 {
 	char	**temp;
 	int		i;
-	
+
 	if (args[1])
 		return ;
 	i = -1;
