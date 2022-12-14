@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/14 19:49:01 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:56:56 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,14 @@ void	update_shlvl(void)
 	int		lvl;
 	
 	shlvl = (my_getenv("SHLVL"));
-	shlvl2 = ft_split(shlvl, '=');
-	lvl = ft_atoi(shlvl2[1]);
-	lvl = lvl + 1;
-	shlvl = ft_strjoin("SHLVL=", ft_itoa(lvl));
-	export_command(shlvl);
-	free(shlvl);
+	if (shlvl)
+	{
+		shlvl2 = ft_split(shlvl, '=');
+		lvl = ft_atoi(shlvl2[1]);
+		lvl = lvl + 1;
+		shlvl = ft_strjoin("SHLVL=", ft_itoa(lvl));
+		export_command(shlvl);
+		free(shlvl);
+	}
+	
 }
