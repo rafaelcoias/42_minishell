@@ -19,7 +19,7 @@ void	pwd_command(char **args)
 	char	path[BUFFER];
 
 	if (args[1])
-		return ((void)error_msg(MANY_ERROR));
+		return ((void)error_msg(MANY_ARGS_ERROR));
 	getcwd(path, BUFFER);
 	ft_printf("%s\n", path);
 }

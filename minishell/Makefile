@@ -17,6 +17,7 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)env_command.c	\
 		$(SRC_PATH)export_command.c	\
 		$(SRC_PATH)pwd_command.c	\
+		$(SRC_PATH)exit_command.c	\
 		$(SRC_PATH)unset_command.c	\
 		$(SRC_PATH)handle_ctrl.c	\
 		$(SRC_PATH)execute.c		\

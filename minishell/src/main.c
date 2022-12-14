@@ -14,11 +14,12 @@
 
 // A fazer
 
-// ctrl-C faz prompt 2x do Prompt
-// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
-// Exit tem de dar um valor no $? ?
-// unset path
-// leaks quando se da export de uma variavel e depois se chama 
+//// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
+// Exit no minishell 2, ...
+// Ctrl's no minishell 2, ...
+
+// Rafael -  Export com declare e ordem alpha
+// Goncalo - Shell Level
 
 t_data	*data(void)
 {
@@ -56,12 +57,6 @@ void	init_all(void)
 	data()->home_path = my_getenv("HOME");
 }
 
-void	exit_program(char *input)
-{
-	(void)input;
-	exit(0);
-}
-
 /*	When minishell starts it will always ask for
  * the users input.
  *
@@ -81,15 +76,13 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	signal_handler();
-	data()->env = cpy_env(envp, NULL);
+	(data()->env) = cpy_env(envp, NULL);
 	data()->error = NONE;
 	while (!data()->exit)
 	{
 		init_all();
+		signal_handler();
 		input = readline(data()->prompt);
-		if (input && !ft_strncmp(input, EXIT_CMD, 4))
-			exit_program(input);
 		add_history(input);
 		if (input && !parser(input) && !create_commands())
 			execute();
@@ -98,5 +91,5 @@ int	main(int argc, char **argv, char **envp)
 		free_all(input);
 	}
 	ft_free_mtx(data()->env);
-	return (0);
+	return (ft_atoi(data()->error));
 }

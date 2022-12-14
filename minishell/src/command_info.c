@@ -42,20 +42,22 @@ char	*get_cmd_path(char *cmd)
 	else if (ft_strchr(cmd, '/') && access(cmd, F_OK))
 		return (NULL);
 	i = -1;
-	data()->env_path = ft_split(my_getenv("PATH"), ':');
-	while (data()->env_path[++i])
+	(data()->env_path) = ft_split(my_getenv("PATH"), ':');
+	while (data()->env_path && data()->env_path[++i])
 	{
 		add_slash = ft_strjoin(data()->env_path[i], "/");
 		path = ft_strjoin(add_slash, cmd);
 		free(add_slash);
 		if (!access(path, F_OK))
-		{
-			ft_free_mtx(data()->env_path);
-			return (path);
-		}
+			break ;
 		free(path);
 	}
-	ft_free_mtx(data()->env_path);
+	if (data()->env_path)
+		ft_free_mtx(data()->env_path);
+	if (!access(path, F_OK))
+		return (path);
+	if (is_builtin(cmd))
+		return (ft_strdup("path"));
 	return (NULL);
 }
 
@@ -103,9 +105,9 @@ void	save_exec_args(void)
 			&& !ft_equals(cmd->args[i], ">>"))
 			cmd->exec_args[j++] = cmd->args[i++];
 		if (cmd->args[i] && (ft_equals(cmd->args[i], "<")
-			|| ft_equals(cmd->args[i], "<<")
-			|| ft_equals(cmd->args[i], ">")
-			|| ft_equals(cmd->args[i], ">>")))
+				|| ft_equals(cmd->args[i], "<<")
+				|| ft_equals(cmd->args[i], ">")
+				|| ft_equals(cmd->args[i], ">>")))
 			cmd->redir = 1;
 		cmd = cmd->next;
 	}

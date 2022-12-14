@@ -12,19 +12,19 @@
 
 #include "../inc/minishell.h"
 
-int	is_builtin(t_cmd *cmd)
+int	is_builtin(char *cmd)
 {
-	if (!ft_strcmp(cmd->exec_args[0], PWD_CMD))
+	if (!ft_strcmp(cmd, PWD_CMD))
 		return (1);
-	else if (!ft_strcmp(cmd->exec_args[0], ECHO_CMD))
+	else if (!ft_strcmp(cmd, ECHO_CMD))
 		return (1);
-	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
+	else if (!ft_strcmp(cmd, CD_CMD))
 		return (1);
-	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
+	else if (!ft_strcmp(cmd, EXPORT_CMD))
 		return (1);
-	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
+	else if (!ft_strcmp(cmd, UNSET_CMD))
 		return (1);
-	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD))
+	else if (!ft_strcmp(cmd, ENV_CMD))
 		return (1);
 	return (0);
 }
@@ -37,6 +37,8 @@ int	forked_builtins(t_cmd *cmd)
 		echo_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
 		cd_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], EXIT_CMD))
+		exit_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
 		unset_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD))
@@ -46,7 +48,7 @@ int	forked_builtins(t_cmd *cmd)
 	else
 		return (0);
 	ft_free_mtx(data()->env);
-	exit(0);
+	exit(ft_atoi(data()->error));
 }
 
 /*	This function sees what command or
@@ -63,6 +65,8 @@ int	check_builtins(t_cmd *cmd)
 		return (0);
 	if (!ft_strcmp(cmd->exec_args[0], CD_CMD))
 		cd_command(cmd->exec_args);
+	else if (!ft_strcmp(cmd->exec_args[0], EXIT_CMD))
+		exit_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
 		unset_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD) && !cmd->redir)

@@ -48,6 +48,7 @@
 # define NORMAL_ERROR_VALUE "1"
 # define OUT_RANGE_VALUE "255"
 # define CTRL_C_VALUE "130"
+# define CTRL_SLASH_VALUE "131"
 # define CMD_NOT_FOUND_VALUE "127"
 
 /* ERROR */
@@ -61,8 +62,10 @@
 # define FILE_ERROR RED"Error : "YELLOW"File does not exists"RESET
 # define OPEN_ERROR RED"Error : "YELLOW"Can not open file or directory"RESET
 # define FEW_ARGS_ERROR RED"Error : "YELLOW"Not enough arguments"RESET
-# define MANY_ERROR RED"Error : "YELLOW"Too many arguments"RESET
+# define MANY_ARGS_ERROR RED"Error : "YELLOW"Too many arguments"RESET
 # define UNSET_ERROR RED"Error : "YELLOW"Invalid parameter name"RESET
+# define NO_MATCHES_ERROR RED"Error : "YELLOW"No matches found"RESET
+# define EXIT_ARGS_ERROR RED"Error : "YELLOW"Numeric argument required"RESET
 
 /* LISTS */
 
@@ -110,7 +113,7 @@ int		execute(void);
 
 /* BUILTINS */
 
-int		is_builtin(t_cmd *cmd);
+int		is_builtin(char *cmd);
 int		check_builtins(t_cmd *cmd);
 int		forked_builtins(t_cmd *cmd);
 
@@ -122,6 +125,7 @@ void	cd_command(char **args);
 void	export_command(char **args);
 void	env_command(char **args);
 void	unset_command(char **args);
+void	exit_command(char **args);
 int		redirections(t_cmd *cmd);
 
 /* HANDLE ENV */
@@ -133,5 +137,6 @@ char	*expand_env(char *str);
 /* SIGNALS */
 
 void	signal_handler(void);
+void	signal_handler_block(void);
 
 #endif

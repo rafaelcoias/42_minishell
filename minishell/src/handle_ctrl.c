@@ -12,21 +12,45 @@
 
 #include "../inc/minishell.h"
 
-void	sigint_handler(int x)
+void	sig_handler_block(int x)
 {
-	(void)x;
-	ft_printf("\n%s", data()->prompt);
+	if (x == SIGINT)
+	{
+		write(1, "\n", 1);
+		data()->error = CTRL_C_VALUE;
+	}
+	else if (x == SIGQUIT)
+	{
+		write(1, "Quit (core dumped)\n", 19);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		data()->error = CTRL_SLASH_VALUE;
+	}
 }
 
-void	sigtstp_handler(int x)
+void	signal_handler_block(void)
 {
-	(void)x;
-	data()->error = CTRL_C_VALUE;
+	signal(SIGINT, sig_handler_block);
+	signal(SIGQUIT, sig_handler_block);
+}
+
+void	sig_handler(int x)
+{
+	if (x == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		data()->error = CTRL_C_VALUE;
+	}
+	else if (x == SIGTSTP)
+		data()->error = CTRL_SLASH_VALUE;
 }
 
 void	signal_handler(void)
 {
-	signal(SIGINT, sigint_handler);
-	signal(SIGTSTP, sigtstp_handler);
+	signal(SIGINT, sig_handler);
+	signal(SIGTSTP, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
