@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 19:42:21 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/14 20:03:09 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		redirections(t_cmd *cmd);
 char	*my_getenv(char *str);
 char	**cpy_env(char **env, char *new);
 char	*expand_env(char *str);
+void	update_shlvl(void);
 
 /* SIGNALS */
 
