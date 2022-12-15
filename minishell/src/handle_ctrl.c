@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_ctrl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:52 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/10 12:53:39 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:37:44 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	sig_handler_block(int x)
 	{
 		write(1, "\n", 1);
 		data()->error = CTRL_C_VALUE;
+		data()->ctrl_control = 0;
 	}
 	else if (x == SIGQUIT)
 	{
@@ -25,13 +26,23 @@ void	sig_handler_block(int x)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		data()->error = CTRL_SLASH_VALUE;
+		data()->ctrl_control = 0;
 	}
 }
 
 void	signal_handler_block(void)
 {
-	signal(SIGINT, sig_handler_block);
-	signal(SIGQUIT, sig_handler_block);
+	if (data()->ctrl_control)
+	{
+		signal(SIGINT, sig_handler_block);
+		signal(SIGQUIT, sig_handler_block);
+	}
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	
 }
 
 void	sig_handler(int x)

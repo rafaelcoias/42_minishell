@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 18:10:52 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/14 15:34:16 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:39:57 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_all(void)
 	data()->npipes = 0;
 	data()->prompt = get_prompt();
 	data()->home_path = my_getenv("HOME");
+	data()->ctrl_control = 1;
 }
 
 /*	When minishell starts it will always ask for

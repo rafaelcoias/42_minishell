@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/14 20:03:09 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:35:35 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_data
 	int		exit;
 	int		fd_heredoc;
 	char	*token[BUFFER];
+	int		ctrl_control;
 	t_cmd	*cmd;
 }	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:44 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/14 15:03:57 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:48:28 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	exec(t_cmd *cmd, int in, int out)
 	if (!cmd->path)
 		return ((void)error_msg(EXEC_ERROR));
 	cmd->pid = fork();
+	data()->ctrl_control = 1;
 	if (!cmd->pid)
 	{
 		signal(SIGINT, SIG_DFL);
