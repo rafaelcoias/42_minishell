@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:46 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 18:05:17 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:52:53 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_cmd_path(char *cmd)
 	int		i;
 
 	if (ft_strchr(cmd, '/') && !access(cmd, F_OK))
-		return (cmd);
+		return (ft_strdup(cmd));
 	else if (ft_strchr(cmd, '/') && access(cmd, F_OK))
 		return (NULL);
 	i = -1;

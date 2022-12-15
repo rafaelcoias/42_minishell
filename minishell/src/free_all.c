@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:26:20 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/11 19:26:20 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:46:56 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ void	free_cmds(void)
 
 void	free_all(char *input)
 {
-	free_cmds();
-	free_tokens();
+	if (data()->token)
+		free_tokens();
+	if (data()->cmd)
+		free_cmds();
 	unlink(".here_doc");
-	free(input);
+	if (input)
+		free(input);
 	free(data()->prompt);
 }
