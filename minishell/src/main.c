@@ -19,7 +19,6 @@
 // Ctrl's no minishell 2, ...
 
 // Rafael -  Export com declare e ordem alpha
-// Goncalo - Shell Level
 
 t_data	*data(void)
 {
@@ -77,6 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(data()->env) = cpy_env(envp, NULL);
+	update_shlvl();
 	data()->error = NONE;
 	while (!data()->exit)
 	{

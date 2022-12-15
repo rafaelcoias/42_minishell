@@ -79,21 +79,23 @@ void	env_command(char **args)
 
 void	update_shlvl(void)
 {
+	char	**args;
 	char	*shlvl;
-	char	**shlvl2;
-	char	*shlvl3;
+	char	*new_shlvl;
 	int		lvl;
 	
-	shlvl = (my_getenv("SHLVL"));
+	shlvl = my_getenv("SHLVL");
 	if (shlvl)
 	{
-		shlvl2 = ft_split(shlvl, '=');
-		lvl = ft_atoi(shlvl2[1]) + 1;
-		shlvl3 = ft_itoa(lvl);
-		shlvl = ft_strjoin("SHLVL=", lvl);
-		export_command(shlvl);
-		free(shlvl);
-		free(shlvl3);
-		free(shlvl2);
+		args = malloc(sizeof(char *) * 3);
+		lvl = ft_atoi(shlvl) + 1;
+		new_shlvl = ft_itoa(lvl);
+		shlvl = ft_strjoin("SHLVL=", new_shlvl);
+		free(new_shlvl);
+		args[0] = ft_strdup("export");
+		args[1] = shlvl;
+		args[2] = NULL;
+		export_command(args);
+		ft_free_mtx(args);
 	}	
 }
