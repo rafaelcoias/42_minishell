@@ -46,7 +46,6 @@
 
 # define NONE "0"
 # define NORMAL_ERROR_VALUE "1"
-# define OUT_RANGE_VALUE "255"
 # define CTRL_C_VALUE "130"
 # define CTRL_SLASH_VALUE "131"
 # define CMD_NOT_FOUND_VALUE "127"
@@ -66,6 +65,8 @@
 # define UNSET_ERROR RED"Error : "YELLOW"Invalid parameter name"RESET
 # define NO_MATCHES_ERROR RED"Error : "YELLOW"No matches found"RESET
 # define EXIT_ARGS_ERROR RED"Error : "YELLOW"Numeric argument required"RESET
+# define INVALID_EXPORT_ERROR RED"Error : "YELLOW"Invalid identifier found"RESET
+
 
 /* LISTS */
 
@@ -133,7 +134,7 @@ int		redirections(t_cmd *cmd);
 char	*my_getenv(char *str);
 char	**cpy_env(char **env, char *new);
 char	*expand_env(char *str);
-void	update_shlvl(void);
+void	export_simple(void);
 
 /* SIGNALS */
 

@@ -12,6 +12,54 @@
 
 #include "../inc/minishell.h"
 
+void	organize_alpha(char **env)
+{
+	char	*tmp;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (env[++i])
+	{
+		j = -1;
+		while (env[++j + 1 + i])
+		{
+			if (ft_strcmp(env[j], env[j + 1]) > 0)
+			{
+				tmp = env[j];
+				env[j] = env[j + 1];
+				env[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+// strcmp("_=") nao imprime
+
+void	export_simple(void)
+{
+	char	**tmp;
+	char	aux[BUFFER];
+	int		i;
+	int		j;
+
+	i = -1;
+	tmp = cpy_env(data()->env, NULL);
+	organize_alpha(tmp);
+	while (tmp[++i])
+	{
+		j = -1;
+		while (tmp[i][++j] && tmp[i][j] != '=')
+			aux[j] = tmp[i][j];
+		aux[j++] = '\0';
+		if (!ft_strcmp(aux, "_"))
+			continue ;
+		ft_printf("declare -x %s=", aux);
+		ft_printf("\"%s\"\n", &tmp[i][j]);
+	}
+	ft_free_mtx(tmp);
+}
+
 char	*my_getenv(char *str)
 {
 	char	**split_env;
@@ -75,27 +123,4 @@ void	env_command(char **args)
 			ft_printf("%s\n", data()->env[i]);
 		ft_free_mtx(temp);
 	}
-}
-
-void	update_shlvl(void)
-{
-	char	**args;
-	char	*shlvl;
-	char	*new_shlvl;
-	int		lvl;
-	
-	shlvl = my_getenv("SHLVL");
-	if (shlvl)
-	{
-		args = malloc(sizeof(char *) * 3);
-		lvl = ft_atoi(shlvl) + 1;
-		new_shlvl = ft_itoa(lvl);
-		shlvl = ft_strjoin("SHLVL=", new_shlvl);
-		free(new_shlvl);
-		args[0] = ft_strdup("export");
-		args[1] = shlvl;
-		args[2] = NULL;
-		export_command(args);
-		ft_free_mtx(args);
-	}	
 }

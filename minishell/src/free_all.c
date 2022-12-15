@@ -31,7 +31,8 @@ void	free_cmds(void)
 	while (aux)
 	{
 		temp = aux->next;
-		free(aux->path);
+		if (aux->path)
+			free(aux->path);
 		i = 0;
 		while (aux->args[i])
 			free(aux->args[i++]);
@@ -47,10 +48,8 @@ void	free_cmds(void)
 
 void	free_all(char *input)
 {
-	if (data()->cmd)
-		free_cmds();
-	if (data()->token[0])
-		free_tokens();
+	free_cmds();
+	free_tokens();
 	unlink(".here_doc");
 	free(input);
 	free(data()->prompt);

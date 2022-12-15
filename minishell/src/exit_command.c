@@ -34,7 +34,7 @@ int	do_exit_value(long long num)
 {
 	if (num >= 0)
 	{
-		if (num >= 0 && num <= 255)
+		if (num >= 0 && num < 255)
 			return ((int)num);
 		while (num > 255)
 			num = num - 256;
@@ -52,6 +52,7 @@ void	exit_command(char **args)
 	long long	tmp;
 	int			status;
 
+	printf("exit\n");
 	if (ft_mtxlen(args) > 2 && !is_num(args[ft_mtxlen(args) - 1]))
 		return ((void)error_msg(MANY_ARGS_ERROR));
 	if (args[1])

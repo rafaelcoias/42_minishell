@@ -16,8 +16,8 @@ void	ft_free_mtx(char **mtx)
 {
 	int	i;
 
-	i = -1;
-	while (mtx[++i])
-		free(mtx[i]);
+	i = 0;
+	while (mtx[i])
+		free(mtx[i++]);
 	free(mtx);
 }

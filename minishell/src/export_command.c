@@ -57,6 +57,19 @@ void	do_export2(char *str, int last, char **temp_env)
 	}
 }
 
+int	check_arg(char *str)
+{
+	int	i;
+
+	i = -1;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (error_msg(INVALID_EXPORT_ERROR));
+	while (str[++i] && str[i] != '=')
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (error_msg(INVALID_EXPORT_ERROR));
+	return (0);
+}
+
 void	do_export(char **args, int last)
 {
 	char	**temp_env;
@@ -66,6 +79,8 @@ void	do_export(char **args, int last)
 	j = 0;
 	while (args[++j])
 	{
+		if (check_arg(args[j]))
+			continue ;
 		temp_env = cpy_env(data()->env, NULL);
 		if (ft_strchr(args[j], '='))
 			do_export2(args[j], last, temp_env);
@@ -79,22 +94,16 @@ void	do_export(char **args, int last)
 	}
 }
 
-void	export_simple(void)
-{
-	int	i;
-
-	i = -1;
-	while (data()->env[++i])
-		ft_printf("%s\n", data()->env[i]);
-}
-
 void	export_command(char **args)
 {
 	int		last;
 
-	last = 0;
 	if (!args[1])
+	{
 		export_simple();
+		return ;
+	}
+	last = 0;
 	while (data()->env[last])
 		last++;
 	do_export(args, last);

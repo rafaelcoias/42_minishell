@@ -15,10 +15,9 @@
 // A fazer
 
 //// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
-// Exit no minishell 2, ...
-// Ctrl's no minishell 2, ...
 
-// Rafael -  Export com declare e ordem alpha
+// Exit no minishell 2 da erro
+// Ctrl's no minishell 2 esta mal
 
 t_data	*data(void)
 {
@@ -46,6 +45,29 @@ char	*get_prompt(void)
 	free(temp);
 	ft_free_mtx(split_pwd);
 	return (prompt);
+}
+
+void	update_shlvl(void)
+{
+	char	**args;
+	char	*shlvl;
+	char	*new_shlvl;
+	int		lvl;
+	
+	shlvl = my_getenv("SHLVL");
+	if (shlvl)
+	{
+		args = malloc(sizeof(char *) * 3);
+		lvl = ft_atoi(shlvl) + 1;
+		new_shlvl = ft_itoa(lvl);
+		shlvl = ft_strjoin("SHLVL=", new_shlvl);
+		free(new_shlvl);
+		args[0] = ft_strdup("export");
+		args[1] = shlvl;
+		args[2] = NULL;
+		export_command(args);
+		ft_free_mtx(args);
+	}	
 }
 
 void	init_all(void)
@@ -91,5 +113,6 @@ int	main(int argc, char **argv, char **envp)
 		free_all(input);
 	}
 	ft_free_mtx(data()->env);
+	printf("exit\n");
 	return (ft_atoi(data()->error));
 }
