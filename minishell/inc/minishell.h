@@ -52,21 +52,21 @@
 
 /* ERROR */
 
-# define PIPE_ERROR RED"Error : "YELLOW"Creating pipe"RESET
-# define FORK_ERROR RED"Error : "YELLOW"Creating process"RESET
-# define MLC_ERROR RED"Error : "YELLOW"Allocation failed"RESET
-# define EXEC_ERROR RED"Error : "YELLOW"Invalid command"RESET
-# define DIR_ERROR RED"Error : "YELLOW"Directory does not exists"RESET
-# define FILE_IS_DIR_ERROR RED"Error : "YELLOW"File cannot be a directory"RESET
-# define FILE_ERROR RED"Error : "YELLOW"File does not exists"RESET
-# define OPEN_ERROR RED"Error : "YELLOW"Can not open file or directory"RESET
-# define FEW_ARGS_ERROR RED"Error : "YELLOW"Not enough arguments"RESET
-# define MANY_ARGS_ERROR RED"Error : "YELLOW"Too many arguments"RESET
-# define UNSET_ERROR RED"Error : "YELLOW"Invalid parameter name"RESET
-# define NO_MATCHES_ERROR RED"Error : "YELLOW"No matches found"RESET
-# define EXIT_ARGS_ERROR RED"Error : "YELLOW"Numeric argument required"RESET
-# define INVALID_EXPORT_ERROR RED"Error : "YELLOW"Invalid identifier found"RESET
-
+# define ERROR "Error : "
+# define PIPE_ERROR "Creating pipe"
+# define FORK_ERROR "Creating process"
+# define MLC_ERROR "Allocation failed"
+# define EXEC_ERROR "Invalid command"
+# define DIR_ERROR "Directory does not exists"
+# define FILE_IS_DIR_ERROR "File cannot be a directory"
+# define FILE_ERROR "File does not exists"
+# define OPEN_ERROR "Can not open file or directory"
+# define FEW_ARGS_ERROR "Not enough arguments"
+# define MANY_ARGS_ERROR "Too many arguments"
+# define UNSET_ERROR "Invalid parameter name"
+# define NO_MATCHES_ERROR "No matches found"
+# define EXIT_ARGS_ERROR "Numeric argument requi"
+# define INVALID_EXPORT_ERROR "Invalid identifier found"
 
 /* LISTS */
 
@@ -128,6 +128,7 @@ void	export_command(char **args);
 void	env_command(char **args);
 void	unset_command(char **args);
 void	exit_command(char **args);
+int		create_files(t_cmd *cmd);
 int		redirections(t_cmd *cmd);
 
 /* HANDLE ENV */
@@ -141,5 +142,6 @@ void	export_simple(void);
 
 void	signal_handler(void);
 void	signal_handler_block(void);
+void	sig_handler_block(int x);
 
 #endif

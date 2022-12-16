@@ -21,20 +21,10 @@ int	check_quotes(char *input, char **token, char c, int j)
 	if (c != ' ')
 		str[i++] = c;
 	while (input[j] && (input[j] != c))
-	{
-		if (input[j] && input[j + 1] && (input[j] == '\\') && (input[j + 1] != '\\'))
-				j++;
 		str[i++] = input[j++];
-	}
 	while (input[j] && input[j] != ' ')
-	{
-		if (input[j] && input[j + 1] && (input[j] == '\\') && (input[j + 1] != '\\'))
-				j++;
 		str[i++] = input[j++];
-	}	
-	if (input[j] && input[j + 1] && (input[j] == '\\') && (input[j + 1] != '\\'))
-				j++;
-	if (input[j] != ' ')
+	if (input[j] && input[j] != ' ')
 		str[i++] = input[j++];
 	str[i] = '\0';
 	*token = str;

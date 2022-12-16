@@ -34,8 +34,6 @@ void	organize_alpha(char **env)
 	}
 }
 
-// strcmp("_=") nao imprime
-
 void	export_simple(void)
 {
 	char	**tmp;
@@ -54,8 +52,11 @@ void	export_simple(void)
 		aux[j++] = '\0';
 		if (!ft_strcmp(aux, "_"))
 			continue ;
-		ft_printf("declare -x %s=", aux);
-		ft_printf("\"%s\"\n", &tmp[i][j]);
+		ft_printf("declare -x %s", aux);
+		if (tmp[i][j - 1])
+			ft_printf("=\"%s\"\n", &tmp[i][j]);
+		else
+			ft_printf("\n");
 	}
 	ft_free_mtx(tmp);
 }
@@ -119,7 +120,7 @@ void	env_command(char **args)
 	while (data()->env[++i])
 	{
 		temp = ft_split(data()->env[i], '=');
-		if (temp[1] && !ft_equals(temp[1], "''"))
+		if (ft_strchr(data()->env[i], '='))
 			ft_printf("%s\n", data()->env[i]);
 		ft_free_mtx(temp);
 	}

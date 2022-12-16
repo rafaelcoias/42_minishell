@@ -52,8 +52,7 @@ char	*get_cmd_path(char *cmd)
 			break ;
 		free(path);
 	}
-	if (data()->env_path)
-		ft_free_mtx(data()->env_path);
+	ft_free_mtx(data()->env_path);
 	if (!access(path, F_OK))
 		return (path);
 	if (is_builtin(cmd))

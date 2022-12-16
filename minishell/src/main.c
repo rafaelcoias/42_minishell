@@ -15,7 +15,6 @@
 // A fazer
 
 //// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
-// Ctrl's no minishell 2 esta mal
 
 t_data	*data(void)
 {
@@ -51,7 +50,7 @@ void	update_shlvl(void)
 	char	*shlvl;
 	char	*new_shlvl;
 	int		lvl;
-	
+
 	shlvl = my_getenv("SHLVL");
 	if (shlvl)
 	{
@@ -110,8 +109,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		free_all(input);
 	}
-	//free_all(input);
 	ft_free_mtx(data()->env);
-	printf("exit\n");
+	printf("\nexit\n");
 	return (ft_atoi(data()->error));
 }

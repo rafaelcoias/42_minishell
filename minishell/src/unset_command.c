@@ -24,6 +24,19 @@ void	do_unset(int i)
 	data()->env[i] = NULL;
 }
 
+int	check_unset_arg(char *str)
+{
+	int	i;
+
+	i = -1;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (error_msg(INVALID_EXPORT_ERROR));
+	while (str[++i])
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (error_msg(INVALID_EXPORT_ERROR));
+	return (0);
+}
+
 void	unset_command(char **args)
 {
 	char	**temp;
@@ -31,11 +44,11 @@ void	unset_command(char **args)
 	int		j;
 
 	j = 0;
-	if (!args[1])
-		return ((void)error_msg(FEW_ARGS_ERROR));
 	while (args[++j])
 	{
 		i = 0;
+		if (check_unset_arg(args[j]))
+			return ;
 		while (data()->env[i])
 		{
 			temp = ft_split(data()->env[i], '=');

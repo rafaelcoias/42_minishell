@@ -73,7 +73,6 @@ int	check_arg(char *str)
 void	do_export(char **args, int last)
 {
 	char	**temp_env;
-	char	*temp;
 	int		j;
 
 	j = 0;
@@ -82,14 +81,7 @@ void	do_export(char **args, int last)
 		if (check_arg(args[j]))
 			continue ;
 		temp_env = cpy_env(data()->env, NULL);
-		if (ft_strchr(args[j], '='))
-			do_export2(args[j], last, temp_env);
-		else
-		{
-			temp = ft_strjoin(args[j], "=''");
-			do_export2(temp, last, temp_env);
-			free(temp);
-		}
+		do_export2(args[j], last, temp_env);
 		ft_free_mtx(temp_env);
 	}
 }

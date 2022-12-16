@@ -25,7 +25,11 @@ void	get_exit_value(char *str)
 
 int	error_msg(char *str)
 {
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(ERROR, 2);
+	ft_putstr_fd(YELLOW, 2);
 	ft_putstr_fd(str, 2);
+	ft_putstr_fd(RESET, 2);
 	ft_putchar_fd('\n', 2);
 	get_exit_value(str);
 	return (1);

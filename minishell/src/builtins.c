@@ -69,9 +69,11 @@ int	check_builtins(t_cmd *cmd)
 		exit_command(cmd->exec_args);
 	else if (!ft_strcmp(cmd->exec_args[0], UNSET_CMD))
 		unset_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD) && !cmd->redir)
+	else if (!ft_strcmp(cmd->exec_args[0], EXPORT_CMD)
+		&& ft_mtxlen(cmd->exec_args) != 1)
 		export_command(cmd->exec_args);
-	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD) && !cmd->redir)
+	else if (!ft_strcmp(cmd->exec_args[0], ENV_CMD) && !cmd->redir
+		&& ft_mtxlen(cmd->exec_args) != 1)
 		env_command(cmd->exec_args);
 	else
 		return (0);

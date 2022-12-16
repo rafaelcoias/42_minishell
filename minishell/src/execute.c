@@ -35,10 +35,14 @@ void	wait_childs(void)
 		waitpid(tmp->pid, &status, 0);
 		tmp = tmp->next;
 	}
+	if (status == 2 || status == 131)
+		sig_handler_block(status);
 }
 
 void	exec(t_cmd *cmd, int in, int out)
 {
+	if (create_files(cmd))
+		return ;
 	if (check_builtins(cmd))
 		return ;
 	if (!cmd->path)
@@ -51,13 +55,13 @@ void	exec(t_cmd *cmd, int in, int out)
 		close(cmd->pipe[0]);
 		close_fds(in, out, 1);
 		if (redirections(cmd))
-			return ;
+			exit(ft_atoi(data()->error));
 		forked_builtins(cmd);
 		if (execve(cmd->path, cmd->exec_args, data()->env) == -1)
 			error_msg(EXEC_ERROR);
 		exit(ft_atoi(data()->error));
 	}
-	signal_handler_block();
+	signal(SIGINT, SIG_IGN);
 	close_fds(in, out, 0);
 }
 
