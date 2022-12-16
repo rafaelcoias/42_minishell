@@ -1,4 +1,3 @@
-
 ########## 		   NAMES 		##########
 
 NAME = minishell
@@ -87,7 +86,7 @@ NORM_CORRECT = @echo "\nNorminette: [$(GREEN)OK$(RESET)]\n"
 
 ${NAME}: ${OBJ_DIR} ${OBJ}
 	${MAKE_LIBFT} -s
-	$(CC) $(CFLAGS) $(MLC_FLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_PATH) -lft
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(LIBFT_PATH) -lft -lreadline
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 

@@ -19,9 +19,10 @@ void	free_tokens(void)
 	i = 0;
 	while (data()->token[i])
 		free(data()->token[i++]);
+	data()->token[0] = NULL;
 }
 
-void	free_cmds(void)
+int	free_cmds(void)
 {
 	t_cmd	*aux;
 	t_cmd	*temp;
@@ -39,6 +40,8 @@ void	free_cmds(void)
 		free(aux);
 		aux = temp;
 	}
+	data()->cmd = NULL;
+	return (0);
 }
 
 /*	Free everything in data list
@@ -48,10 +51,8 @@ void	free_cmds(void)
 
 void	free_all(char *input)
 {
-	if (data()->token)
-		free_tokens();
-	if (data()->cmd)
-		free_cmds();
+	free_tokens();
+	free_cmds();
 	unlink(".here_doc");
 	if (input)
 		free(input);

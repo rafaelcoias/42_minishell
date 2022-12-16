@@ -144,4 +144,9 @@ void	signal_handler(void);
 void	signal_handler_block(void);
 void	sig_handler_block(int x);
 
+/* FREE */
+
+void	free_tokens(void);
+int		free_cmds(void);
+
 #endif

@@ -12,39 +12,35 @@
 
 #include "../inc/minishell.h"
 
-int	check_quotes(char *input, char **token, char c, int j)
+int	handle_quotes(char *input, char **token)
 {
 	char	str[BUFFER];
 	int		i;
+	char	c;
 
 	i = 0;
-	if (c != ' ')
-		str[i++] = c;
-	while (input[j] && (input[j] != c))
-		str[i++] = input[j++];
-	while (input[j] && input[j] != ' ')
-		str[i++] = input[j++];
-	if (input[j] && input[j] != ' ')
-		str[i++] = input[j++];
-	str[i] = '\0';
-	*token = str;
-	return (j);
-}
-
-int	handle_quotes(char *input, char **token)
-{
-	if (input[0] == '\"')
-		return (check_quotes(input, token, '\"', 1));
-	else if (input[0] == '\'')
-		return (check_quotes(input, token, '\'', 1));
+	c = input[0];
+	if (c != '\'' && c != '\"')
+		c = ' ';
 	else
-		return (check_quotes(input, token, ' ', 0));
+		str[i++] = c;
+	while (input[i] && input[i] != c)
+	{
+		str[i] = input[i];
+		i++;
+	}
+	if (c == '\'' || c == '\"')
+		str[i++] = c;
+	str[i] = '\0';
+	printf("%s$\n", str);
+	*token = str;
+	return (i);
 }
 
 int	parser(char	*input)
 {
-	int	i;
-	int	ti;
+	int		i;
+	int		ti;
 
 	i = 0;
 	ti = 0;
@@ -52,9 +48,11 @@ int	parser(char	*input)
 	{
 		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
 			i++;
-		i = i + handle_quotes(&input[i], &data()->token[ti]);
+		i = i + handle_quotes(&input[i], &data()->token[ti]) - 1;
 		data()->token[ti] = ft_strdup(data()->token[ti]);
 		ti++;
+		if (!input[i])
+			break ;
 		i++;
 	}
 	data()->token[ti] = NULL;

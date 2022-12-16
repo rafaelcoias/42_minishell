@@ -102,5 +102,5 @@ int	execute(void)
 		index++;
 	}
 	wait_childs();
-	return (0);
+	return (free_cmds());
 }

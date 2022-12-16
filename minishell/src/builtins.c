@@ -47,7 +47,7 @@ int	forked_builtins(t_cmd *cmd)
 		env_command(cmd->exec_args);
 	else
 		return (0);
-	ft_free_mtx(data()->env);
+	free_cmds();
 	exit(ft_atoi(data()->error));
 }
 

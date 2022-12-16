@@ -14,7 +14,7 @@
 
 // A fazer
 
-//// Perceber porque $TESTE = t => ca$TESTE nao funciona como cat
+// Cat 2x vez chamado da erro
 
 t_data	*data(void)
 {

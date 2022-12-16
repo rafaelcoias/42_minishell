@@ -65,10 +65,7 @@ t_cmd	*new_cmd(void)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
-	cmd->redir = 0;
-	cmd->fd_in = 0;
 	cmd->fd_out = 1;
-	cmd->path = NULL;
 	return (cmd);
 }
 
@@ -136,5 +133,6 @@ int	create_commands(void)
 	}
 	data()->error = NONE;
 	save_exec_args();
+	free_tokens();
 	return (0);
 }

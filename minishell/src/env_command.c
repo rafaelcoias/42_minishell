@@ -92,10 +92,11 @@ char	**cpy_env(char **env, char *new)
 	int		i;
 
 	i = -1;
+	new_env = NULL;
 	if (new)
-		new_env = malloc(sizeof(char *) * ft_mtxlen(env) + 2);
+		new_env = malloc(sizeof(char *) * (ft_mtxlen(env) + 2));
 	else
-		new_env = malloc(sizeof(char *) * ft_mtxlen(env) + 1);
+		new_env = malloc(sizeof(char *) * (ft_mtxlen(env) + 1));
 	if (!new_env)
 	{
 		error_msg(MLC_ERROR);
