@@ -19,18 +19,21 @@ int	handle_quotes(char *input, char **token)
 	char	c;
 
 	i = 0;
-	c = input[0];
-	if (c != '\'' && c != '\"')
-		c = ' ';
-	else
-		str[i++] = c;
-	while (input[i] && input[i] != c)
+	while (input[i] && input[i] != ' ')
 	{
-		str[i] = input[i];
-		i++;
+		c = input[i];
+		if (c != '\'' && c != '\"')
+			c = ' ';
+		else
+			str[i++] = c;
+		while (input[i] && input[i] != c)
+		{
+			str[i] = input[i];
+			i++;
+		}
+		if (input[i] && (c == '\'' || c == '\"'))
+			str[i] = c;
 	}
-	if (c == '\'' || c == '\"')
-		str[i++] = c;
 	str[i] = '\0';
 	*token = str;
 	return (i);
