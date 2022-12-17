@@ -32,7 +32,6 @@ int	handle_quotes(char *input, char **token)
 	if (c == '\'' || c == '\"')
 		str[i++] = c;
 	str[i] = '\0';
-	printf("%s$\n", str);
 	*token = str;
 	return (i);
 }
@@ -48,6 +47,8 @@ int	parser(char	*input)
 	{
 		while (input[i] && (input[i] == ' ' || input[i] == '\t'))
 			i++;
+		if (!input[i])
+			break ;
 		i = i + handle_quotes(&input[i], &data()->token[ti]) - 1;
 		data()->token[ti] = ft_strdup(data()->token[ti]);
 		ti++;

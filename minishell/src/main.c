@@ -14,8 +14,6 @@
 
 // A fazer
 
-// Cat 2x vez chamado da erro
-
 t_data	*data(void)
 {
 	static t_data	data;
@@ -110,6 +108,6 @@ int	main(int argc, char **argv, char **envp)
 		free_all(input);
 	}
 	ft_free_mtx(data()->env);
-	printf("\nexit\n");
+	printf("exit\n");
 	return (ft_atoi(data()->error));
 }

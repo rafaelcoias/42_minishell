@@ -86,7 +86,7 @@ NORM_CORRECT = @echo "\nNorminette: [$(GREEN)OK$(RESET)]\n"
 
 ${NAME}: ${OBJ_DIR} ${OBJ}
 	${MAKE_LIBFT} -s
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(LIBFT_PATH) -lft -lreadline
+	$(CC) $(CFLAGS) $(MLC_FLAGS) $(OBJ) -o $(NAME) -L $(LIBFT_PATH) -lft -lreadline
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 

@@ -99,11 +99,12 @@ void	save_exec_args(void)
 			&& !ft_equals(cmd->args[i], "<<")
 			&& !ft_equals(cmd->args[i], ">")
 			&& !ft_equals(cmd->args[i], ">>"))
+		{
+			if (i == 0)
+				cmd->path = get_cmd_path(cmd->args[i]);
 			cmd->exec_args[j++] = cmd->args[i++];
-		if (cmd->args[i] && (ft_equals(cmd->args[i], "<")
-				|| ft_equals(cmd->args[i], "<<")
-				|| ft_equals(cmd->args[i], ">")
-				|| ft_equals(cmd->args[i], ">>")))
+		}
+		if (cmd->args[i])
 			cmd->redir = 1;
 		cmd = cmd->next;
 	}
@@ -127,8 +128,6 @@ int	create_commands(void)
 			data()->cmd = new_cmd();
 			end = data()->cmd;
 		}
-		if (i == 0)
-			end->path = get_cmd_path(data()->token[j]);
 		end->args[i++] = expand_env(data()->token[j]);
 	}
 	data()->error = NONE;
