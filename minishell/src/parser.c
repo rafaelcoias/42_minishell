@@ -32,7 +32,7 @@ int	handle_quotes(char *input, char **token)
 			i++;
 		}
 		if (input[i] && (c == '\'' || c == '\"'))
-			str[i] = c;
+			str[i++] = c;
 	}
 	str[i] = '\0';
 	*token = str;

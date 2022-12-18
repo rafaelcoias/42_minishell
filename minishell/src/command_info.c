@@ -12,6 +12,14 @@
 
 #include "../inc/minishell.h"
 
+int	is_path(char *path)
+{
+	if (!access(path, F_OK))
+		return (1);
+	free(path);
+	return (0);
+}
+
 /* This function searches for the command path.
  *
  * If first checks if there is a '/' and it tests
@@ -48,25 +56,16 @@ char	*get_cmd_path(char *cmd)
 		add_slash = ft_strjoin(data()->env_path[i], "/");
 		path = ft_strjoin(add_slash, cmd);
 		free(add_slash);
-		if (!access(path, F_OK))
+		if (is_path(path))
 			break ;
-		free(path);
 	}
-	ft_free_mtx(data()->env_path);
+	if (data()->env_path)
+		ft_free_mtx(data()->env_path);
 	if (!access(path, F_OK))
 		return (path);
 	if (is_builtin(cmd))
 		return (ft_strdup("path"));
 	return (NULL);
-}
-
-t_cmd	*new_cmd(void)
-{
-	t_cmd	*cmd;
-
-	cmd = ft_calloc(1, sizeof(t_cmd));
-	cmd->fd_out = 1;
-	return (cmd);
 }
 
 int	new_pipe(int *i, int j, t_cmd **end)
@@ -77,7 +76,8 @@ int	new_pipe(int *i, int j, t_cmd **end)
 		data()->npipes++;
 		if (!data()->cmd)
 			return (1);
-		(*end)->next = new_cmd();
+		(*end)->next = ft_calloc(1, sizeof(t_cmd));
+		(*end)->fd_out = 1;
 		*end = (*end)->next;
 		return (1);
 	}
@@ -125,7 +125,8 @@ int	create_commands(void)
 			continue ;
 		if (!data()->cmd)
 		{
-			data()->cmd = new_cmd();
+			data()->cmd = ft_calloc(1, sizeof(t_cmd));
+			data()->cmd->fd_out = 1;
 			end = data()->cmd;
 		}
 		end->args[i++] = expand_env(data()->token[j]);

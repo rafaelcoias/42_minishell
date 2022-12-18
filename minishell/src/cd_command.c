@@ -44,25 +44,57 @@ void	export_oldpwd(char *oldpwd)
 	ft_free_mtx(args);
 }
 
+char	*handle_home_path(char *path)
+{
+	char	*home_dir;
+	char	*tmp;
+
+	home_dir = my_getenv("HOME");
+	if (path[1])
+		tmp = ft_strjoin(home_dir, &path[1]);
+	else
+		tmp = ft_strjoin(home_dir, "/");
+	return (tmp);
+}
+
+char	*do_cd(char **args)
+{
+	char	*cd;
+
+	if (!args[1])
+		cd = ft_strdup(my_getenv("HOME"));
+	else
+	{
+		if (args[1][0] == '~' && (!args[1][1] || (args[1][1] && args[1][1] == '/')))
+			cd = handle_home_path(args[1]);
+		else if (ft_equals(args[1], "-"))
+			cd = ft_strdup(my_getenv("OLDPWD"));
+		else
+			cd = ft_strdup(args[1]);
+	}
+	return (cd);
+}
+
 void	cd_command(char **args)
 {
 	char	path[BUFFER];
 	char	oldpwd[BUFFER];
+	char	*cd;
 
+	if (ft_mtxlen(args) > 2)
+		return ((void)error_msg(MANY_ARGS_ERROR));
 	getcwd(oldpwd, BUFFER);
-	if (!args[1])
-		chdir(data()->home_path);
-	else
+	cd = do_cd(args);
+	if (chdir(cd))
 	{
-		if (ft_equals(args[1], "-"))
-		{
-			chdir(my_getenv("OLDPWD"));
-			getcwd(path, BUFFER);
-			ft_printf("%s\n", path);
-		}
-		else
-			if (chdir(args[1]))
-				return ((void)error_msg(DIR_ERROR));
+		free(cd);
+		return ((void)error_msg(DIR_ERROR));
+	}
+	free(cd);
+	if (ft_equals(args[1], "-"))
+	{
+		getcwd(path, BUFFER);
+		ft_printf("%s\n", path);
 	}
 	export_oldpwd(oldpwd);
 	export_pwd();
