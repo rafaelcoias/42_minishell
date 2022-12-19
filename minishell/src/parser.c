@@ -21,6 +21,7 @@ int	handle_quotes(char *input, char **token)
 	i = 0;
 	while (input[i] && input[i] != ' ')
 	{
+		str[i] = 0;
 		c = input[i];
 		if (c != '\'' && c != '\"')
 			c = ' ';
@@ -33,9 +34,10 @@ int	handle_quotes(char *input, char **token)
 		}
 		if (input[i] && (c == '\'' || c == '\"'))
 			str[i++] = c;
+		str[i] = 0;
 	}
 	str[i] = '\0';
-	*token = str;
+	*token = ft_strdup(str);
 	return (i);
 }
 
@@ -53,8 +55,7 @@ int	parser(char	*input)
 		if (!input[i])
 			break ;
 		i = i + handle_quotes(&input[i], &data()->token[ti]) - 1;
-		data()->token[ti] = ft_strdup(data()->token[ti]);
-		ti++;
+		data()->token[++ti] = NULL;
 		if (!input[i])
 			break ;
 		i++;

@@ -6,11 +6,41 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:44 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/15 18:38:00 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:24:00 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+/* This function searches for the command path.
+ *
+ * If first checks if there is a '/' and it tests
+ * to see if the command already is its path.
+ *
+ * If the command has '/' but is no valid command
+ * then it returns an error.
+ *
+ *	Then, the PATH variable in the ENVP list is read
+ *	until the end. For every path it is added a '/'
+ *	and then the command itself.
+ *
+ *	Finally, it tests the path and if it is accessable
+ *	returns it, if not tries again with other path.
+ *
+ *	If there are no matches in the PATH variable,
+ *	the command is invalid and return an error.
+ * */
+
+char	*get_path(char *cmd, char *path)
+{
+	if (data()->env_path)
+		ft_free_mtx(data()->env_path);
+	if (path && !access(path, F_OK))
+		return (path);
+	if (is_builtin(cmd))
+		return (ft_strdup("path"));
+	return (NULL);
+}
 
 void	close_fds(int in, int out, int dup)
 {
@@ -30,6 +60,7 @@ void	wait_childs(void)
 	int		status;
 
 	tmp = data()->cmd;
+	status = 0;
 	while (tmp)
 	{
 		waitpid(tmp->pid, &status, 0);
@@ -65,17 +96,6 @@ void	exec(t_cmd *cmd, int in, int out)
 	close_fds(in, out, 0);
 }
 
-int	check_question_mark(char **args)
-{
-	int	i;
-
-	i = -1;
-	while (args[++i])
-		if (ft_strchr(args[i], '?'))
-			return (error_msg(NO_MATCHES_ERROR));
-	return (0);
-}
-
 int	execute(void)
 {
 	t_cmd	*tmp;
@@ -90,13 +110,10 @@ int	execute(void)
 		data()->error = NONE;
 		if (pipe(tmp->pipe) == -1)
 			return (error_msg(PIPE_ERROR));
-		if (!check_question_mark(tmp->args))
-		{
-			if (index != data()->npipes)
-				exec(tmp, fd_in, tmp->pipe[1]);
-			else
-				exec(tmp, fd_in, STDOUT_FILENO);
-		}
+		if (index != data()->npipes)
+			exec(tmp, fd_in, tmp->pipe[1]);
+		else
+			exec(tmp, fd_in, STDOUT_FILENO);
 		fd_in = tmp->pipe[0];
 		tmp = tmp->next;
 		index++;

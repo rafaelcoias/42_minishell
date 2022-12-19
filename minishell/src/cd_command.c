@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:39 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/11/16 19:50:43 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:51:01 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	*do_cd(char **args)
 		cd = ft_strdup(my_getenv("HOME"));
 	else
 	{
-		if (args[1][0] == '~' && (!args[1][1] || (args[1][1] && args[1][1] == '/')))
+		if (args[1][0] == '~' && (!args[1][1]
+			|| (args[1][1] && args[1][1] == '/')))
 			cd = handle_home_path(args[1]);
 		else if (ft_equals(args[1], "-"))
 			cd = ft_strdup(my_getenv("OLDPWD"));

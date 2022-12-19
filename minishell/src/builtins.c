@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_command.c                                   :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 22:36:01 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/10/12 00:46:23 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:13:23 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	forked_builtins(t_cmd *cmd)
 		env_command(cmd->exec_args);
 	else
 		return (0);
-	free_cmds();
+	free_all(NULL);
+	ft_free_mtx(data()->env);
 	exit(ft_atoi(data()->error));
 }
 

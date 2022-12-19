@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:26:20 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/15 19:46:56 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:40:13 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	free_tokens(void)
 
 	i = 0;
 	while (data()->token[i])
-		free(data()->token[i++]);
-	data()->token[0] = NULL;
+	{
+		free(data()->token[i]);
+		data()->token[i++] = NULL;
+	}
 }
 
 int	free_cmds(void)
@@ -34,8 +36,9 @@ int	free_cmds(void)
 		temp = aux->next;
 		if (aux->path)
 			free(aux->path);
+		aux->path = NULL;
 		i = 0;
-		while (aux->args[i])
+		while (aux->args && aux->args[i])
 			free(aux->args[i++]);
 		free(aux);
 		aux = temp;

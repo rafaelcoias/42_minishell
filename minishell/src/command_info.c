@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 20:49:46 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/15 19:52:53 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:22:51 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,9 @@ int	is_path(char *path)
 	if (!access(path, F_OK))
 		return (1);
 	free(path);
+	path = NULL;
 	return (0);
 }
-
-/* This function searches for the command path.
- *
- * If first checks if there is a '/' and it tests
- * to see if the command already is its path.
- *
- * If the command has '/' but is no valid command
- * then it returns an error.
- *
- *	Then, the PATH variable in the ENVP list is read
- *	until the end. For every path it is added a '/'
- *	and then the command itself.
- *
- *	Finally, it tests the path and if it is accessable
- *	returns it, if not tries again with other path.
- *
- *	If there are no matches in the PATH variable,
- *	the command is invalid and return an error.
- * */
 
 char	*get_cmd_path(char *cmd)
 {
@@ -45,6 +27,8 @@ char	*get_cmd_path(char *cmd)
 	char	*path;
 	int		i;
 
+	path = NULL;
+	add_slash = NULL;
 	if (ft_strchr(cmd, '/') && !access(cmd, F_OK))
 		return (ft_strdup(cmd));
 	else if (ft_strchr(cmd, '/') && access(cmd, F_OK))
@@ -59,13 +43,7 @@ char	*get_cmd_path(char *cmd)
 		if (is_path(path))
 			break ;
 	}
-	if (data()->env_path)
-		ft_free_mtx(data()->env_path);
-	if (!access(path, F_OK))
-		return (path);
-	if (is_builtin(cmd))
-		return (ft_strdup("path"));
-	return (NULL);
+	return (get_path(cmd, path));
 }
 
 int	new_pipe(int *i, int j, t_cmd **end)
@@ -125,7 +103,7 @@ int	create_commands(void)
 			continue ;
 		if (!data()->cmd)
 		{
-			data()->cmd = ft_calloc(1, sizeof(t_cmd));
+			(data()->cmd) = ft_calloc(1, sizeof(t_cmd));
 			data()->cmd->fd_out = 1;
 			end = data()->cmd;
 		}

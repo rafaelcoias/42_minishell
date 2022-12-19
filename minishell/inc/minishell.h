@@ -6,7 +6,7 @@
 /*   By: gseco-lu <gseco-lu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 11:16:30 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/12/15 19:29:07 by gseco-lu         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:24:13 by gseco-lu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	free_tokens(void);
 
 /* HANDLE COMMAND */
 
+char	*get_path(char *cmd, char *path);
 int		create_commands(void);
 int		handle_pipe(void);
 int		execute(void);
