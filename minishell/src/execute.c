@@ -68,6 +68,10 @@ void	wait_childs(void)
 	}
 	if (status == 2 || status == 131)
 		sig_handler_block(status);
+	if (status == 256)
+		data()->error = CAT_VALUE;
+	else if (status == 512)
+		data()->error = LS_VALUE;
 }
 
 void	exec(t_cmd *cmd, int in, int out)

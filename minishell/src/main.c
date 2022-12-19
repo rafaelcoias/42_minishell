@@ -29,16 +29,21 @@ char	*get_prompt(void)
 	char	*temp;
 
 	getcwd(path, BUFFER);
-	split_pwd = ft_split(path, '/');
-	temp = split_pwd[ft_mtxlen(split_pwd) - 1];
-	temp = ft_strjoin(CYAN, temp);
+	if (!ft_equals(path, "/"))
+	{
+		split_pwd = ft_split(path, '/');
+		temp = split_pwd[ft_mtxlen(split_pwd) - 1];
+		temp = ft_strjoin(CYAN, temp);
+		ft_free_mtx(split_pwd);
+	}
+	else
+		temp = ft_strjoin(CYAN, "/");
 	prompt = ft_strjoin(temp, RED);
 	free(temp);
 	temp = ft_strjoin(prompt, " ~ ");
 	free(prompt);
 	prompt = ft_strjoin(temp, RESET);
 	free(temp);
-	ft_free_mtx(split_pwd);
 	return (prompt);
 }
 

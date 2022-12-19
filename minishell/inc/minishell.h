@@ -49,6 +49,9 @@
 # define CTRL_C_VALUE "130"
 # define CTRL_SLASH_VALUE "131"
 # define CMD_NOT_FOUND_VALUE "127"
+# define CAT_VALUE "1"
+# define LS_VALUE "2"
+# define CMD_NOT_FOUND_VALUE "127"
 
 /* ERROR */
 
