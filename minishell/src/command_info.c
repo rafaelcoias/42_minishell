@@ -17,7 +17,6 @@ int	is_path(char *path)
 	if (!access(path, F_OK))
 		return (1);
 	free(path);
-	path = NULL;
 	return (0);
 }
 
@@ -42,6 +41,8 @@ char	*get_cmd_path(char *cmd)
 		free(add_slash);
 		if (is_path(path))
 			break ;
+		else
+			path = NULL;
 	}
 	return (get_path(cmd, path));
 }

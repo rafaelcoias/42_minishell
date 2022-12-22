@@ -48,7 +48,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
-MLC_FLAGS = -fsanitize=address
+MLC_FLAGS = #-fsanitize=address
 
 ########## 		   COLORS 		##########
 

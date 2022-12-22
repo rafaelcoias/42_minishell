@@ -48,9 +48,9 @@ void	close_fds(int in, int out, int dup)
 		dup2(in, STDIN_FILENO);
 	if (dup && out != STDOUT_FILENO)
 		dup2(out, STDOUT_FILENO);
-	if (in != 0)
+	if (in != 0 && in != -1)
 		close(in);
-	if (out != 1)
+	if (out != 1 && out != -1)
 		close(out);
 }
 

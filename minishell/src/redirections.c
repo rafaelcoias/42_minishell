@@ -46,10 +46,12 @@ int	redirect_input(t_cmd *cmd, int i)
 	{
 		fd = open(cmd->args[i + 1], O_DIRECTORY);
 		if (fd > 0)
+		{
+			close(fd);
 			return (error_msg(FILE_IS_DIR_ERROR));
+		}
 		if (access(cmd->args[i + 1], F_OK))
 			return (error_msg(FILE_ERROR));
-		close(fd);
 		cmd->fd_in = open(cmd->args[i + 1], O_RDONLY);
 		if (cmd->fd_in == -1)
 			return (error_msg(OPEN_ERROR));
@@ -63,8 +65,10 @@ int	redirect_output(t_cmd *cmd, int i)
 
 	fd = open(cmd->args[i + 1], O_DIRECTORY);
 	if (fd > 0)
+	{
+		close(fd);
 		return (error_msg(FILE_IS_DIR_ERROR));
-	close(fd);
+	}
 	if (ft_equals(cmd->args[i], ">>") && cmd->args[i + 1])
 		cmd->fd_out = open(cmd->args[i + 1], O_CREAT \
 		| O_WRONLY | O_APPEND, 0644);
