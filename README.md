@@ -4,6 +4,13 @@
 
 Create your own mini shell that works like a normal terminal shell. Make sure it follows the given rules.
 
+## Skills Learned
+
+  - Forks - processes
+  - New C libraries and its functions
+  - Change file descriptors
+  - Signals between processes
+
 ## Rules
 
   - Display a prompt when waiting for a new command.
