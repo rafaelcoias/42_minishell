@@ -50,6 +50,8 @@ CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
 MLC_FLAGS = #-fsanitize=address
 
+# valgrind --leak-check=full --show-leak-kinds=all --log-file="logfile.out" -v ./minishell
+
 ########## 		   COLORS 		##########
 
 GREEN		=	\033[0;32m

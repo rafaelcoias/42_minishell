@@ -49,7 +49,7 @@ int	forked_builtins(t_cmd *cmd)
 		return (0);
 	free_all(NULL);
 	ft_free_mtx(data()->env);
-	exit(ft_atoi(data()->error));
+	exit(data()->error);
 }
 
 /*	This function sees what command or

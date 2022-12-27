@@ -58,7 +58,9 @@ char	*get_env_var(int *z, char *str)
 	}
 	*z = ft_strlen(temp);
 	*z = check_error_value(temp, *z);
-	return (my_getenv(temp));
+	if (!temp[0])
+		return (ft_itoa(data()->error));
+	return (ft_strdup(my_getenv(temp)));
 }
 
 int	do_expand(char *result, int k, char *str, int *str_i)
@@ -76,6 +78,7 @@ int	do_expand(char *result, int k, char *str, int *str_i)
 		env_var = get_env_var(&z, all_vars[0]);
 		while (env_var && env_var[++j])
 			result[k++] = env_var[j];
+		free(env_var);
 		while (all_vars[0][z] && all_vars[0][z] != '\"')
 			result[k++] = all_vars[0][z++];
 		*str_i = *str_i + z;

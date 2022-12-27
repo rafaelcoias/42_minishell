@@ -68,10 +68,12 @@ void	wait_childs(void)
 	}
 	if (status == 2 || status == 131)
 		sig_handler_block(status);
-	if (status == 256)
+	else if (status == 256)
 		data()->error = CAT_VALUE;
 	else if (status == 512)
 		data()->error = LS_VALUE;
+	else if (status != NONE)
+		data()->error = status % 255;
 }
 
 void	exec(t_cmd *cmd, int in, int out)
@@ -90,11 +92,11 @@ void	exec(t_cmd *cmd, int in, int out)
 		close(cmd->pipe[0]);
 		close_fds(in, out, 1);
 		if (redirections(cmd))
-			exit(ft_atoi(data()->error));
+			exit(data()->error);
 		forked_builtins(cmd);
 		if (execve(cmd->path, cmd->exec_args, data()->env) == -1)
 			error_msg(EXEC_ERROR);
-		exit(ft_atoi(data()->error));
+		exit(data()->error);
 	}
 	signal(SIGINT, SIG_IGN);
 	close_fds(in, out, 0);

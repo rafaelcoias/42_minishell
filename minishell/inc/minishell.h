@@ -44,14 +44,13 @@
 
 /* EXIT VALUES */
 
-# define NONE "0"
-# define NORMAL_ERROR_VALUE "1"
-# define CTRL_C_VALUE "130"
-# define CTRL_SLASH_VALUE "131"
-# define CMD_NOT_FOUND_VALUE "127"
-# define CAT_VALUE "1"
-# define LS_VALUE "2"
-# define CMD_NOT_FOUND_VALUE "127"
+# define NONE 0
+# define NORMAL_ERROR_VALUE 1
+# define CTRL_C_VALUE 130
+# define CTRL_SLASH_VALUE 131
+# define CMD_NOT_FOUND_VALUE 127
+# define CAT_VALUE 1
+# define LS_VALUE 2
 
 /* ERROR */
 
@@ -92,7 +91,7 @@ typedef struct s_data
 	char	*prompt;
 	char	**env;
 	char	**env_path;
-	char	*error;
+	int		error;
 	int		npipes;
 	int		exit;
 	int		fd_heredoc;

@@ -114,5 +114,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_free_mtx(data()->env);
 	printf("exit\n");
-	return (ft_atoi(data()->error));
+	return (data()->error);
 }

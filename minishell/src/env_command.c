@@ -70,7 +70,7 @@ char	*my_getenv(char *str)
 
 	j = -1;
 	if (!str[0])
-		return (data()->error);
+		return (NULL);
 	while (data()->env[++j])
 	{
 		split_env = ft_split(data()->env[j], '=');

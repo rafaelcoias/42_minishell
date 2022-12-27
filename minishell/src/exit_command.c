@@ -69,7 +69,7 @@ void	exit_command(char **args)
 			status = do_exit_value(tmp);
 	}
 	else
-		status = ft_atoi(data()->error);
+		status = data()->error;
 	free_all(NULL);
 	ft_free_mtx(data()->env);
 	exit(status);
