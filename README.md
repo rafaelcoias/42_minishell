@@ -2,6 +2,10 @@
 
 ## Assigment
 
+'''
+valgrind --leak-check=full --show-leak-kinds=all --log-file="logfile.out" -v ./minishell
+'''
+
 Create your own mini shell that works like a normal terminal shell. Make sure it follows the given rules.
 
 ## Skills Learned
