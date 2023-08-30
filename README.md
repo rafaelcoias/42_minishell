@@ -73,7 +73,7 @@ Make sure you know what all the following function are and what they do
 
 <details><summary>My grade</summary>
   
-Coming soon
+![Screenshot from 2023-08-30 04-32-20](https://github.com/rafaelcoias/42_minishell/assets/91686183/6556f233-71a5-45ff-8d0f-e9b32c24e41c)
   
 </details>
 
