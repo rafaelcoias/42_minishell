@@ -71,12 +71,6 @@ Make sure you know what all the following function are and what they do
   
   ## Preview
 
-<details><summary>My Minishell</summary>
-  
-Coming soon
-  
-</details>
-
 <details><summary>My grade</summary>
   
 Coming soon
